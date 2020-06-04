@@ -44,6 +44,12 @@ class Menu
      */
     private $questions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="menus")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $session;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -129,6 +135,18 @@ class Menu
                 $question->setMenu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSession(): ?Session
+    {
+        return $this->session;
+    }
+
+    public function setSession(?Session $session): self
+    {
+        $this->session = $session;
 
         return $this;
     }

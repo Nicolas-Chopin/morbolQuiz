@@ -39,9 +39,25 @@ class Session
      */
     private $questions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Menu::class, mappedBy="session")
+     */
+    private $menus;
+
+    /**
+     * @ORM\OneToOne(targetEntity=TeamA::class, mappedBy="session", cascade={"persist", "remove"})
+     */
+    private $teamA;
+
+    /**
+     * @ORM\OneToOne(targetEntity=TeamB::class, mappedBy="session", cascade={"persist", "remove"})
+     */
+    private $teamB;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->menus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +127,73 @@ class Session
             if ($question->getSession() === $this) {
                 $question->setSession(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Menu[]
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    public function addMenu(Menu $menu): self
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus[] = $menu;
+            $menu->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenu(Menu $menu): self
+    {
+        if ($this->menus->contains($menu)) {
+            $this->menus->removeElement($menu);
+            // set the owning side to null (unless already changed)
+            if ($menu->getSession() === $this) {
+                $menu->setSession(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTeamA(): ?TeamA
+    {
+        return $this->teamA;
+    }
+
+    public function setTeamA(?TeamA $teamA): self
+    {
+        $this->teamA = $teamA;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSession = null === $teamA ? null : $this;
+        if ($teamA->getSession() !== $newSession) {
+            $teamA->setSession($newSession);
+        }
+
+        return $this;
+    }
+
+    public function getTeamB(): ?TeamB
+    {
+        return $this->teamB;
+    }
+
+    public function setTeamB(?TeamB $teamB): self
+    {
+        $this->teamB = $teamB;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSession = null === $teamB ? null : $this;
+        if ($teamB->getSession() !== $newSession) {
+            $teamB->setSession($newSession);
         }
 
         return $this;

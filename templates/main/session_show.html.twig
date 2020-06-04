@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Morbol Quiz{% endblock %}
+{% block title %}Session : {{ session.name }}{% endblock %}
 
 {% block body %}
 <style>
@@ -10,10 +10,10 @@
 
 <div class="example-wrapper">
     <h1>Morbol Quiz</h1>
-
+    <h2>Session : {{ session.name }}</h2>
     <ul>
-        {% for session in sessions %}
-            <li> <a href="{{ path('session_show', {id: session.id}) }}">{{ session.name }}</a></li>
+        {% for category in categories %}
+            <li> <a href="#">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
 
