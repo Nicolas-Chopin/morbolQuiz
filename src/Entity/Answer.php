@@ -43,6 +43,11 @@ class Answer
      */
     private $question;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCorrect;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Answer
     public function setQuestion(?Question $question): self
     {
         $this->question = $question;
+
+        return $this;
+    }
+
+    public function getIsCorrect(): ?bool
+    {
+        return $this->isCorrect;
+    }
+
+    public function setIsCorrect(bool $isCorrect): self
+    {
+        $this->isCorrect = $isCorrect;
 
         return $this;
     }

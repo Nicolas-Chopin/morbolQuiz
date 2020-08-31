@@ -54,6 +54,11 @@ class Session
      */
     private $teamB;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sessions")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -195,6 +200,18 @@ class Session
         if ($teamB->getSession() !== $newSession) {
             $teamB->setSession($newSession);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
