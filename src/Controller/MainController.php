@@ -31,7 +31,7 @@ class MainController extends AbstractController
 
         $categories = $categoryRepository->findAllOrderId();
 
-        return $this->render('main/session_show.html.twig', [
+        return $this->render('user/session_show.html.twig', [
             'categories' => $categories,
             'session' => $session,
         ]);
