@@ -11,11 +11,9 @@
 <div class="example-wrapper">
     <h1>Morbol Quiz</h1>
 
-    <ul>
-        {% for session in sessions %}
-            <li> <a href="{{ path('session_show', {id: session.id}) }}">{{ session.name }}</a></li>
-        {% endfor %}
-    </ul>
+<a href="{{ path('user_register') }}">S'inscrire</a>
+<a href="{{ path('login') }}">Se connecter</a>
+
 
 </div>
 {% endblock %}
