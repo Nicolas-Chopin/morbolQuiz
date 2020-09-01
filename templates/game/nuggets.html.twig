@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuggets : {{ session.name }}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    <h2>Nuggets : {{ session.name }}</h2>
+
+    <h3>{{ question.text }}</h3>
+
+    {% for answer in answers %}
+            <li> {{ answer.text }}</a></li>
+    {% endfor %}
+
+    {% if orderInNuggets == 1 %}
+    <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
+    {% else %}
+    <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets - 1}) }}">Question précédente</a>
+    {% endif %}
+    {% if orderInNuggets == 6 %}
+    <a href="{{ path('sorp', {id: session.id}) }}">Sel ou poivre</a>
+    {% else %}
+    <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets + 1}) }}">Question suivante</a>
+    {% endif %}
+
+</div>
+{% endblock %}

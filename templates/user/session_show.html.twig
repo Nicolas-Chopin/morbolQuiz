@@ -11,9 +11,11 @@
 <div class="example-wrapper">
     <h2>Session : {{ session.name }}</h2>
     <ul>
-        {% for category in categories %}
-            <li> <a href="#">{{ category.name }}</a></li>
-        {% endfor %}
+        <li> <a href="{{ path('nuggets', {id: session.id, orderInNuggets: questionNumber}) }}">{{ nuggets.name }}</a></li>
+        <li> <a href="{{ path('sorp', {id: session.id}) }}">{{ salt.name }}</a></li>
+        <li> <a href="{{ path('menus', {id: session.id}) }}">{{ menus.name }}</a></li>
+        <li> <a href="{{ path('sum', {id: session.id}) }}">{{ sum.name }}</a></li>
+        <li> <a href="{{ path('death_morbol', {id: session.id}) }}">{{ deathMorbol.name }}</a></li>
     </ul>
 
 </div>

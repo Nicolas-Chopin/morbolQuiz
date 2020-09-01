@@ -16,6 +16,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {    
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         //creat admin role
@@ -27,7 +34,8 @@ class AppFixtures extends Fixture
         //create admin user for tests
         $user = new User();
         $user->setUsername('admin');
-        $user->setPassword('admin'); 
+        $password = $this->encoder->encodePassword($user, 'admin');
+        $user->setPassword($password);
         $user->setEmail('admin'.'@morbol.com');
         $user->setIsEmailCheck(true);
         $user->setIsActive(true);
@@ -64,11 +72,15 @@ class AppFixtures extends Fixture
         $session1->setName("Session test 1");
         $session1->setCreatedAt(new \DateTime());
         $session1->setUser($user);
+        $session1->setSorpName('Sel ou Poivre ou les deux session1');
+        $session1->setSumName('Thème de l\'addition session1');
         $manager->persist($session1);
         $session2 = new Session();
         $session2->setName("Session test 2");
         $session2->setCreatedAt(new \DateTime());
         $session2->setUser($user);
+        $session2->setSorpName('Sel ou Poivre ou les deux session1');
+        $session2->setSumName('Thème de l\'addition session2');
         $manager->persist($session2);
 
         // create menus for 2 sessions

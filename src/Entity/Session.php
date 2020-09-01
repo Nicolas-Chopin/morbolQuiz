@@ -59,6 +59,16 @@ class Session
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sorpName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sumName;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -212,6 +222,30 @@ class Session
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSorpName(): ?string
+    {
+        return $this->sorpName;
+    }
+
+    public function setSorpName(string $sorpName): self
+    {
+        $this->sorpName = $sorpName;
+
+        return $this;
+    }
+
+    public function getSumName(): ?string
+    {
+        return $this->sumName;
+    }
+
+    public function setSumName(string $sumName): self
+    {
+        $this->sumName = $sumName;
 
         return $this;
     }

@@ -137,7 +137,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/user/moderate/{id}", name="admin_user_moderate", methods="GET|POST")
+     * @Route("/admin/user/moderate/{id<\d+>}", name="admin_user_moderate", methods="GET|POST")
      */
     public function moderate(Request $request, User $user)
     {

@@ -30,9 +30,22 @@ class MainController extends AbstractController
         }
 
         $categories = $categoryRepository->findAllOrderId();
+        
+        $categoryOne = $categories[0];
+        $categoryTwo = $categories[1];
+        $categoryThree = $categories[2];
+        $categoryFour = $categories[3];
+        $categoryFive = $categories[4];
+
+        $questionNumber = 1;
 
         return $this->render('user/session_show.html.twig', [
-            'categories' => $categories,
+            'nuggets' => $categoryOne,
+            'salt' => $categoryTwo,
+            'menus' => $categoryThree,
+            'sum' => $categoryFour,
+            'deathMorbol' => $categoryFive,
+            'questionNumber' => $questionNumber,
             'session' => $session,
         ]);
     }
