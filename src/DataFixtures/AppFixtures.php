@@ -74,13 +74,21 @@ class AppFixtures extends Fixture
         $session1->setUser($user);
         $session1->setSorpName('Sel ou Poivre ou les deux session1');
         $session1->setSumName('Thème de l\'addition session1');
+        $session1->setATeamName('Equipe Ketchup');
+        $session1->setATeamScore(0);
+        $session1->setBTeamName('Equipe Mayo');
+        $session1->setBTeamScore(0);
         $manager->persist($session1);
         $session2 = new Session();
         $session2->setName("Session test 2");
         $session2->setCreatedAt(new \DateTime());
         $session2->setUser($user);
-        $session2->setSorpName('Sel ou Poivre ou les deux session1');
+        $session2->setSorpName('Sel ou Poivre ou les deux session2');
         $session2->setSumName('Thème de l\'addition session2');
+        $session2->setATeamName('Equipe Ketchup');
+        $session2->setATeamScore(0);
+        $session2->setBTeamName('Equipe Mayo');
+        $session2->setBTeamScore(0);
         $manager->persist($session2);
 
         // create menus for 2 sessions

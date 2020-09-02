@@ -69,6 +69,36 @@ class Session
      */
     private $sumName;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $aTeamName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $bTeamName;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $aTeamScore;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $bTeamScore;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $aTeamImgUrl;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bTeamImgUrl;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -246,6 +276,78 @@ class Session
     public function setSumName(string $sumName): self
     {
         $this->sumName = $sumName;
+
+        return $this;
+    }
+
+    public function getATeamName(): ?string
+    {
+        return $this->aTeamName;
+    }
+
+    public function setATeamName(string $aTeamName): self
+    {
+        $this->aTeamName = $aTeamName;
+
+        return $this;
+    }
+
+    public function getBTeamName(): ?string
+    {
+        return $this->bTeamName;
+    }
+
+    public function setBTeamName(string $bTeamName): self
+    {
+        $this->bTeamName = $bTeamName;
+
+        return $this;
+    }
+
+    public function getATeamScore(): ?int
+    {
+        return $this->aTeamScore;
+    }
+
+    public function setATeamScore(int $aTeamScore): self
+    {
+        $this->aTeamScore = $aTeamScore;
+
+        return $this;
+    }
+
+    public function getBTeamScore(): ?int
+    {
+        return $this->bTeamScore;
+    }
+
+    public function setBTeamScore(int $bTeamScore): self
+    {
+        $this->bTeamScore = $bTeamScore;
+
+        return $this;
+    }
+
+    public function getATeamImgUrl(): ?string
+    {
+        return $this->aTeamImgUrl;
+    }
+
+    public function setATeamImgUrl(?string $aTeamImgUrl): self
+    {
+        $this->aTeamImgUrl = $aTeamImgUrl;
+
+        return $this;
+    }
+
+    public function getBTeamImgUrl(): ?string
+    {
+        return $this->bTeamImgUrl;
+    }
+
+    public function setBTeamImgUrl(?string $bTeamImgUrl): self
+    {
+        $this->bTeamImgUrl = $bTeamImgUrl;
 
         return $this;
     }

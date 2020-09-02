@@ -13,6 +13,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class GameController extends AbstractController
 {
     /**
+     * @Route("/session/{id<\d+>}", name="session_show", methods={"GET"})
+     */
+    public function selectedSession($id, Session $session = null, CategoryRepository $categoryRepository)
+    {
+        if ($session === null) {
+            throw $this->createNotFoundException('Session introuvable.');
+        }
+
+        $categories = $categoryRepository->findAllOrderId();
+        
+        $categoryOne = $categories[0];
+        $categoryTwo = $categories[1];
+        $categoryThree = $categories[2];
+        $categoryFour = $categories[3];
+        $categoryFive = $categories[4];
+
+        $questionNumber = 1;
+
+        return $this->render('game/session_show.html.twig', [
+            'nuggets' => $categoryOne,
+            'salt' => $categoryTwo,
+            'menus' => $categoryThree,
+            'sum' => $categoryFour,
+            'deathMorbol' => $categoryFive,
+            'questionNumber' => $questionNumber,
+            'session' => $session,
+        ]);
+    }
+    
+    /**
      * @Route("/session/{id<\d+>}/nuggets/{orderInNuggets<\d+>}", name="nuggets")
      */
     public function nuggets(Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository, $orderInNuggets)
