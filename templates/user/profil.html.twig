@@ -15,6 +15,8 @@
     <dd class="col-9">{{ user.email }}</dd>
 </dl>
 
+<a href="{{ path('session_add') }}">Créer une session</a>
+
 <ul>
     {% for session in sessions %}
         <li> <a href="{{ path('session_show', {id: session.id}) }}">{{ session.name }}</a></li>

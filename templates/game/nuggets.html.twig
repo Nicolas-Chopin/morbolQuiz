@@ -12,22 +12,26 @@
 
     <h2>{{ category.name }} : {{ session.name }}</h2>
 
-    <h3>{{ question.text }}</h3>
-
-    {% for answer in answers %}
-            <li> {{ answer.text }}</a></li>
-    {% endfor %}
-
-    {% if orderInNuggets == 1 %}
-    <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
+    {% if question == null %}
+        <h3>Aucune question trouvée. Pensez à les créer avant !</h3>
+        <a href="{{ path('question_add', {id: session.id}) }}">Ajouter une question</a>
+        <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
     {% else %}
-    <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets - 1}) }}">Question précédente</a>
-    {% endif %}
-    {% if orderInNuggets == 6 %}
-    <a href="{{ path('sorp', {id: session.id}) }}">Sel ou poivre</a>
-    {% else %}
-    <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets + 1}) }}">Question suivante</a>
-    {% endif %}
+        <h3>{{ question.text }}</h3>
+            {% for answer in answers %}
+                    <li> {{ answer.text }}</a></li>
+            {% endfor %}
 
+            {% if orderInNuggets == 1 %}
+                <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
+            {% else %}
+                <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets - 1}) }}">Question précédente</a>
+            {% endif %}
+            {% if orderInNuggets == 6 %}
+                <a href="{{ path('sorp', {id: session.id}) }}">Sel ou poivre</a>
+            {% else %}
+                <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets + 1}) }}">Question suivante</a>
+            {% endif %}
+    {% endif %}
 </div>
 {% endblock %}

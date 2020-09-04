@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Form\SessionType;
+use App\Repository\MenuRepository;
 use App\Repository\AnswerRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\MenuRepository;
 use App\Repository\QuestionRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -39,6 +41,39 @@ class GameController extends AbstractController
             'deathMorbol' => $categoryFive,
             'questionNumber' => $questionNumber,
             'session' => $session,
+        ]);
+    }
+
+    /**
+     * @Route("/session/add", name="session_add", methods={"GET", "POST"})
+     */
+    public function add(Request $request)
+    {
+        $session = new Session();
+
+        $form = $this->createForm(SessionType::class, $session);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $session = $form->getData();
+            $session->setCreatedAt(new \DateTime());
+            $session->setATeamScore(0);
+            $session->setBTeamScore(0);
+            $session->setUser($this->getUser());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($session);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Session ajoutée');
+
+            return $this->redirectToRoute('user_profile');
+        }
+
+        return $this->render('question/add.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
     
