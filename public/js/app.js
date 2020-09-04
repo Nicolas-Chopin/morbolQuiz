@@ -9,16 +9,14 @@ let app = {
 
         let url = new URL(document.URL);
         let id = url.pathname.split('/')[2];
-
-        
-        
+        let isSum = url.pathname.split('/')[3];
         //--------------------------------------------------------------------
-        // Plus & Minus methods for teams' scores
+        // Plus, Minus & Reset methods for teams' scores
         //--------------------------------------------------------------------
         // fetching current scores
         let aScoreFetched = document.getElementById("a-score").innerHTML;
         let bScoreFetched = document.getElementById("b-score").innerHTML;
-        // target + event resolve for +1 point to A team
+        // target + event resolve for + point to A team
         let plusA = document.getElementById("plus-a-team");
         plusA.addEventListener("click", function () {
           let fetchOptions = {
@@ -26,11 +24,17 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          fetch(app.apiBaseURL + 'api/session/'+id+'/plusonea', fetchOptions)
-          .then(app.convertJSONtoJS)
-          .then(document.getElementById("a-score").innerHTML = ++aScoreFetched);
+          if (isSum == 'sum') {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/plusthreea', fetchOptions)
+            .then(document.getElementById("a-score").innerHTML = (parseInt(aScoreFetched) + 3))
+            .then(aScoreFetched = document.getElementById("a-score").innerHTML);
+            
+          } else {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/plusonea', fetchOptions)
+            .then(document.getElementById("a-score").innerHTML = ++aScoreFetched);
+          } 
         },);
-        // target + event resolve for +1 point to B team
+        // target + event resolve for + point to B team
         let plusB = document.getElementById("plus-b-team");
         plusB.addEventListener("click", function () {
           let fetchOptions = {
@@ -38,11 +42,17 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          fetch(app.apiBaseURL + 'api/session/'+id+'/plusoneb', fetchOptions)
-          .then(app.convertJSONtoJS)
-          .then(document.getElementById("b-score").innerHTML = ++bScoreFetched);
+          if (isSum == 'sum') {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/plusthreeb', fetchOptions)
+            .then(document.getElementById("b-score").innerHTML = (parseInt(bScoreFetched) + 3))
+            .then(bScoreFetched = document.getElementById("b-score").innerHTML);
+            
+          } else {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/plusoneb', fetchOptions)
+            .then(document.getElementById("b-score").innerHTML = ++bScoreFetched);
+          }
         },);
-        // target + event resolve for -1 point to A team
+        // target + event resolve for - point to A team
         let minusA = document.getElementById("minus-a-team");
         minusA.addEventListener("click", function () {
           let fetchOptions = {
@@ -50,11 +60,17 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          fetch(app.apiBaseURL + 'api/session/'+id+'/minusonea', fetchOptions)
-          .then(app.convertJSONtoJS)
-          .then(document.getElementById("a-score").innerHTML = --aScoreFetched);
+          if (isSum == 'sum') {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/minusthreea', fetchOptions)
+            .then(document.getElementById("a-score").innerHTML = (parseInt(aScoreFetched) - 3))
+            .then(aScoreFetched = document.getElementById("a-score").innerHTML);
+            
+          } else {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/minusonea', fetchOptions)
+            .then(document.getElementById("a-score").innerHTML = --aScoreFetched);
+          }
         },);
-        // target + event resolve for -1 point to B team
+        // target + event resolve for - point to B team
         let minusB = document.getElementById("minus-b-team");
         minusB.addEventListener("click", function () {
           let fetchOptions = {
@@ -62,12 +78,41 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          fetch(app.apiBaseURL + 'api/session/'+id+'/minusoneb', fetchOptions)
-          .then(app.convertJSONtoJS)
-          .then(document.getElementById("b-score").innerHTML = --bScoreFetched);
+          if (isSum == 'sum') {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/minusthreeb', fetchOptions)
+            .then(document.getElementById("b-score").innerHTML = (parseInt(bScoreFetched) - 3))
+            .then(bScoreFetched = document.getElementById("b-score").innerHTML);
+            
+          } else {
+            fetch(app.apiBaseURL + 'api/session/'+id+'/minusoneb', fetchOptions)
+            .then(document.getElementById("b-score").innerHTML = --bScoreFetched);
+          }
         },);
-    },
-    
+        // target + event reset A team's score
+        let resetA = document.getElementById("reset-a-team");
+        resetA.addEventListener("click", function () {
+          let fetchOptions = {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache'
+          };
+          fetch(app.apiBaseURL + 'api/session/'+id+'/reseta', fetchOptions)
+          .then(document.getElementById("a-score").innerHTML = 0)
+          .then(aScoreFetched = 0);
+        },);
+        // target + event reset B team's score
+        let resetB = document.getElementById("reset-b-team");
+        resetB.addEventListener("click", function () {
+          let fetchOptions = {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache'
+          };
+          fetch(app.apiBaseURL + 'api/session/'+id+'/resetb', fetchOptions)
+          .then(document.getElementById("b-score").innerHTML = 0)
+          .then(bScoreFetched = 0);
+        },);
+    },    
 
     //--------------------------------------------------------------------
     // Tool method
