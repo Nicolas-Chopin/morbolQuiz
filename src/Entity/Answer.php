@@ -48,6 +48,12 @@ class Answer
      */
     private $isCorrect;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Session::class, inversedBy="answers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $session;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,5 +134,17 @@ class Answer
     public function __toString()
     {
         return $this->text;
+    }
+
+    public function getSession(): ?Session
+    {
+        return $this->session;
+    }
+
+    public function setSession(?Session $session): self
+    {
+        $this->session = $session;
+
+        return $this;
     }
 }

@@ -151,6 +151,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session1);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -171,6 +172,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -191,6 +193,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder(1);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session1);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);  
         }
@@ -208,6 +211,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder(1);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);  
         }
@@ -230,6 +234,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session1);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -251,6 +256,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session1);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -272,6 +278,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session1);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -293,6 +300,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -314,6 +322,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -335,6 +344,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder($nb);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect((bool)random_int(0, 1)<0.5);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);
             }  
@@ -355,6 +365,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder(1);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect(true);
+                $answer->setSession($session1);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);  
         }
@@ -372,6 +383,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder(1);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect(true);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);  
         }
@@ -391,6 +403,7 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder(1);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect(true);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);  
         }
@@ -408,12 +421,10 @@ class AppFixtures extends Fixture
                 $answer->setAnswerOrder(1);
                 $answer->setQuestion($question);
                 $answer->setIsCorrect(true);
+                $answer->setSession($session2);
                 $answer->setCreatedAt(new \DateTime());
                 $manager->persist($answer);  
         }
-
-
-
 
         $manager->flush();
     }

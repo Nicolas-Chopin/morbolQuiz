@@ -40,7 +40,7 @@ class Menu
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="menu")
+     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="menu", cascade={"persist", "remove"})
      */
     private $questions;
 

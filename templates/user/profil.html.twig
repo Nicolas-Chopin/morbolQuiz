@@ -19,7 +19,10 @@
 
 <ul>
     {% for session in sessions %}
-        <li> <a href="{{ path('session_show', {id: session.id}) }}">{{ session.name }}</a></li>
+        <li>
+            <a href="{{ path('session_show', {id: session.id}) }}">{{ session.name }}</a>
+            <a href="{{ path('session_overview', {id: session.id}) }}">Gérer cette partie</a>
+        </li>
     {% endfor %}
 </ul>
 

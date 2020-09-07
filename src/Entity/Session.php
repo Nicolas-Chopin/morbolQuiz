@@ -35,24 +35,14 @@ class Session
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="session")
+     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="session", cascade={"persist", "remove"})
      */
     private $questions;
 
     /**
-     * @ORM\OneToMany(targetEntity=Menu::class, mappedBy="session")
+     * @ORM\OneToMany(targetEntity=Menu::class, mappedBy="session", cascade={"persist", "remove"})
      */
     private $menus;
-
-    /**
-     * @ORM\OneToOne(targetEntity=TeamA::class, mappedBy="session", cascade={"persist", "remove"})
-     */
-    private $teamA;
-
-    /**
-     * @ORM\OneToOne(targetEntity=TeamB::class, mappedBy="session", cascade={"persist", "remove"})
-     */
-    private $teamB;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sessions")
@@ -99,10 +89,16 @@ class Session
      */
     private $bTeamImgUrl;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="session")
+     */
+    private $answers;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->menus = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,42 +199,6 @@ class Session
             if ($menu->getSession() === $this) {
                 $menu->setSession(null);
             }
-        }
-
-        return $this;
-    }
-
-    public function getTeamA(): ?TeamA
-    {
-        return $this->teamA;
-    }
-
-    public function setTeamA(?TeamA $teamA): self
-    {
-        $this->teamA = $teamA;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newSession = null === $teamA ? null : $this;
-        if ($teamA->getSession() !== $newSession) {
-            $teamA->setSession($newSession);
-        }
-
-        return $this;
-    }
-
-    public function getTeamB(): ?TeamB
-    {
-        return $this->teamB;
-    }
-
-    public function setTeamB(?TeamB $teamB): self
-    {
-        $this->teamB = $teamB;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newSession = null === $teamB ? null : $this;
-        if ($teamB->getSession() !== $newSession) {
-            $teamB->setSession($newSession);
         }
 
         return $this;
@@ -355,5 +315,36 @@ class Session
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->contains($answer)) {
+            $this->answers->removeElement($answer);
+            // set the owning side to null (unless already changed)
+            if ($answer->getSession() === $this) {
+                $answer->setSession(null);
+            }
+        }
+
+        return $this;
     }
 }

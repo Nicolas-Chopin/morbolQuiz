@@ -26,9 +26,6 @@ class QuestionType extends AbstractType
                 'class' => Category::class,
                 'expanded' => true,
             ])
-            ->add('session', EntityType::class, [
-                'class' => Session::class,
-            ])
             ->add('menu', EntityType::class, [
                 'class' => Menu::class,
                 'placeholder' => 'Aucun',

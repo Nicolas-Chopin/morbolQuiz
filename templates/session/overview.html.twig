@@ -1,0 +1,319 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion de la partie : {{ session.name }}{% endblock %}
+
+{% block body %}
+
+<h1>Gestion de la partie : {{ session.name }}</h1> 
+
+<a href="{{ path('user_profile') }}">Retour à mon profil</a>
+
+<div class="example-wrapper">
+    <h2>Partie : {{ session.name }}</h2>
+    
+    <ul>
+        <li>Nom de la première équipe : {{ session.aTeamName }}</li>
+
+        <li>Nom de la seconde équipe : {{ session.bTeamName }}</li>
+
+        <a href="{{ path('session_edit', {id: session.id}) }}" class="text-decoration-none btn btn-outline-dark">
+            Modifier les paramètres de la partie <i class="fas fa-edit text-warning"></i>
+        </a>
+        <a href="{{ path('session_delete', {id: session.id}) }}" class="text-decoration-none btn btn-outline-danger">
+            Supprimer la partie <i class="fas fa-trash text-danger"></i>
+        </a>
+    </ul>
+    <ul>
+        <li>
+            {{ nuggets.name }} - 6 questions (3 par équipe) <br>
+            <a href="{{ path('question_add', {id: session.id}) }}" class="text-success text-decoration-none btn btn-outline-success">
+                Ajouter une question <i class="fas fa-plus-circle text-success"></i>
+            </a>
+        </li>
+            <ul>
+                {% for nuggetsQuestion in nuggetsQuestions %}
+                    <li>
+                        {% if nuggetsQuestion is defined and nuggetsQuestion.orderInNuggets < 7 %}
+                            Question {{ nuggetsQuestion.orderInNuggets }} : {{ nuggetsQuestion.text }}
+                            <a href="{{ path('question_edit', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-warning text-decoration-none">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{{ path('question_delete', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-danger text-decoration-none">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <ul>
+                                {% for nuggetsAnswer in nuggetsQuestion.answers %}
+                                    <li>
+                                        Réponse {{ loop.index }} : {{ nuggetsAnswer.text }}
+                                        <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>                      
+                        {% endif %}
+                        {% if nuggetsQuestion.orderInNuggets > 6 %}
+                            Question en surplus : elle ne sera pas présentée pendant la partie. <br>
+                            {{ nuggetsQuestion.text }}
+                            <a href="{{ path('question_edit', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-warning text-decoration-none">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{{ path('question_delete', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-danger text-decoration-none">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <ul>
+                                {% for nuggetsAnswer in nuggetsQuestion.answers %}
+                                    <li>
+                                        Réponse {{ loop.index }} : {{ nuggetsAnswer.text }}
+                                        <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul> 
+                        {% endif %}
+                    </li>
+                    {% if loop.length != 6 and loop.last %}
+                        Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        <li>
+            {{ salt.name }} : {{ session.sorpName }} - 10 questions
+            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                <i class="fas fa-edit"></i>
+            </a>
+        </li>
+            <ul>{% for sorpQuestion in sorpQuestions %}
+                <li>
+                    {% if sorpQuestion is defined and sorpQuestion.orderInSaltpepper < 11 %}
+                        Question {{ sorpQuestion.orderInSaltpepper }} : {{ sorpQuestion.text }}
+                        <a href="{{ path('question_edit', {id: session.id, idQuestion: sorpQuestion.id}) }}" class="text-warning text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: sorpQuestion.id}) }}" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <ul>
+                            {% for sorpAnswer in sorpQuestion.answers %}
+                                <li>
+                                    Réponse {{ loop.index }} : {{ sorpAnswer.text }}
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul> 
+                    {% endif %}
+                    {% if sorpQuestion.orderInSaltpepper > 10 %}
+                        Question en surplus : elle ne sera pas présentée pendant la partie. <br>
+                        {{ sorpQuestion.text }}
+                        <a href="{{ path('question_edit', {id: session.id, idQuestion: sorpQuestion.id}) }}" class="text-warning text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: sorpQuestion.id}) }}" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <ul>
+                            {% for sorpAnswer in sorpQuestion.answers %}
+                                <li>
+                                    Réponse : {{ sorpAnswer.text }}
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+                {% if loop.length != 10 and loop.last %}
+                    Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+            {% endfor %}</ul>
+            
+        <li>
+            {{ menus.name }}
+            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                <i class="fas fa-trash"></i>
+            </a>
+        </li>
+            <ul>{% for menusName in menusNames %}
+                <li>
+                    Menu {{loop.index}} : {{ menusName.name }} - 5 questions par menu 
+                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <ul>{% for menusQuestion in menusQuestions %}
+                        {% if menusQuestion and menusQuestion.menu == menusName.name %}
+                            <li>
+                                Question {{ menusQuestion.orderInMenu }} : {{ menusQuestion.text }}
+                                <a href="{{ path('question_edit', {id: session.id, idQuestion: menusQuestion.id}) }}" class="text-warning text-decoration-none">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ path('question_delete', {id: session.id, idQuestion: menusQuestion.id}) }}" class="text-danger text-decoration-none">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <ul>
+                                    {% for menusAnswer in menusQuestion.answers %}
+                                        <li>
+                                            Réponse {{ loop.index }} : {{ menusAnswer.text }}
+                                            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>                            
+                        {% endif %}   
+                        {% if loop.length != 15 and loop.last %}
+                            Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                        {% endif %} 
+                    {% endfor %}</ul>
+                </li>
+                {% if loop.length != 3 and loop.last %}
+                    Le nombre total de menu est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+            {% endfor %}</ul>
+
+        <li>
+            {{ sum.name }} : {{ session.sumName }} - 10 questions
+            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                <i class="fas fa-edit"></i>
+            </a>
+        </li>
+            <ul>{% for sumQuestion in sumQuestions %}
+                <li>
+                    {% if sumQuestion is defined and sumQuestion.orderInSum < 11 %}
+                        Question {{ sumQuestion.orderInSum }} : {{ sumQuestion.text }}
+                        <a href="{{ path('question_edit', {id: session.id, idQuestion: sumQuestion.id}) }}" class="text-warning text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: sumQuestion.id}) }}" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <ul>
+                            {% for sumAnswer in sumQuestion.answers %}
+                                <li>
+                                    Réponse {{ loop.index }} : {{ sumAnswer.text }}
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if sumQuestion.orderInSum > 10 %}
+                        Question en surplus : elle ne sera pas présentée pendant la partie. <br>
+                        {{ sumQuestion.text }}
+                        <a href="{{ path('question_edit', {id: session.id, idQuestion: sumQuestion.id}) }}" class="text-warning text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: sumQuestion.id}) }}" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <ul>
+                            {% for sumAnswer in sumQuestion.answers %}
+                                <li>
+                                    Réponse {{ loop.index }} : {{ sumAnswer.text }}
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+                {% if loop.length != 10 and loop.last %}
+                    Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+                </li>
+            {% endfor %}</ul>
+
+        <li>
+            {{ deathMorbol.name }} - 10 questions
+        </li>
+            <ul>{% for deathQuestion in deathQuestions %}
+                <li>
+                    {% if deathQuestion is defined and deathQuestion.orderInDeathquiz < 11 %}
+                        Question {{ deathQuestion.orderInDeathquiz }} : {{ deathQuestion.text }}
+                        <a href="{{ path('question_edit', {id: session.id, idQuestion: deathQuestion.id}) }}" class="text-warning text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: deathQuestion.id}) }}" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <ul>
+                            {% for deathAnswer in deathQuestion.answers %}
+                                <li>
+                                    Réponse : {{ deathAnswer.text }}
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if deathQuestion.orderInDeathquiz > 10 %}
+                        Question en surplus : elle ne sera pas présentée pendant la partie. <br>
+                        {{ deathQuestion.text }}
+                        <a href="{{ path('question_edit', {id: session.id, idQuestion: deathQuestion.id}) }}" class="text-warning text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: deathQuestion.id}) }}" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <ul>
+                            {% for deathAnswer in deathQuestion.answers %}
+                                <li>
+                                    Réponse : {{ deathAnswer.text }}
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('session_edit', {id: session.id}) }}" class="text-danger text-decoration-none">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+                {% if loop.length != 10 and loop.last %}
+                    Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+                </li>
+            {% endfor %}</ul>
+
+    </ul>
+</div>
+{% endblock %}

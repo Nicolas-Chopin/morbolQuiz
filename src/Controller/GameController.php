@@ -45,6 +45,64 @@ class GameController extends AbstractController
     }
 
     /**
+     * @Route("/session/{id<\d+>}/overview", name="session_overview", methods={"GET"})
+     */
+    public function sessionOverview($id, Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, MenuRepository $menuRepository, AnswerRepository $answerRepository)
+    {
+        if ($session === null) {
+            throw $this->createNotFoundException('Session introuvable.');
+        }
+
+        $categories = $categoryRepository->findAllOrderId();
+        
+        $categoryOne = $categories[0];
+        $categoryTwo = $categories[1];
+        $categoryThree = $categories[2];
+        $categoryFour = $categories[3];
+        $categoryFive = $categories[4];
+
+        $nuggetsQuestions = $questionRepository->findBy([
+            'category' => $categories[0],
+            'session' => $session,
+        ],['orderInNuggets' => 'ASC']);
+        $sorpQuestions = $questionRepository->findBy([
+            'category' => $categories[1],
+            'session' => $session,
+        ],['orderInSaltpepper' => 'ASC']);
+        $menusQuestions = $questionRepository->findBy([
+            'category' => $categories[2],
+            'session' => $session,
+        ],['orderInMenu' => 'ASC']);
+        $sumQuestions = $questionRepository->findBy([
+            'category' => $categories[3],
+            'session' => $session,
+        ],['orderInSum' => 'ASC']);
+        $deathQuestions = $questionRepository->findBy([
+            'category' => $categories[4],
+            'session' => $session,
+        ],['orderInDeathquiz' => 'ASC']);
+
+        $menusNames = $menuRepository->findBy([
+            'session' => $session,
+        ],['menuOrder' => 'ASC']);
+
+        return $this->render('session/overview.html.twig', [
+            'nuggets' => $categoryOne,
+            'salt' => $categoryTwo,
+            'menus' => $categoryThree,
+            'sum' => $categoryFour,
+            'deathMorbol' => $categoryFive,
+            'session' => $session,
+            'nuggetsQuestions' => $nuggetsQuestions,
+            'sorpQuestions' => $sorpQuestions,
+            'menusNames' => $menusNames,
+            'menusQuestions' => $menusQuestions,
+            'sumQuestions' => $sumQuestions,
+            'deathQuestions' => $deathQuestions,
+        ]);
+    }
+
+    /**
      * @Route("/session/add", name="session_add", methods={"GET", "POST"})
      */
     public function add(Request $request)
@@ -72,9 +130,67 @@ class GameController extends AbstractController
             return $this->redirectToRoute('user_profile');
         }
 
-        return $this->render('question/add.html.twig', [
+        return $this->render('session/add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/session/edit/{id<\d+>}", name="session_edit", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Session $session = null)
+    {
+        //$this->denyAccessUnlessGranted('edit', $session);
+        
+        if ($session === null) {
+            // 404 ?
+            throw $this->createNotFoundException('Cette partie n\'existe pas.');
+        }
+
+        $form = $this->createForm(SessionType::class, $session);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $session = $form->getData();
+            $session->setUpdatedAt(new \DateTime());
+            $session->setUser($session->getUser());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($session);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Session modifiée');
+
+            return $this->redirectToRoute('session_overview', [
+                'id' => $session->getId(),
+            ]);
+        }
+
+        return $this->render('session/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/session/delete/{id<\d+>}", name="session_delete", methods={"GET", "POST"})
+     */
+    public function delete(Request $request, Session $session = null)
+    {
+        //$this->denyAccessUnlessGranted('delete', $session);
+        
+        if ($session === null) {
+            // 404 ?
+            throw $this->createNotFoundException('Cette partie n\'existe pas.');
+        }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($session);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Session supprimée');
+
+            return $this->redirectToRoute('user_profile');
     }
     
     /**
