@@ -13,11 +13,13 @@
     <dd class="col-9">{{ user.username }}</dd>
     <dt class="col-3">Adresse e-mail</dt>
     <dd class="col-9">{{ user.email }}</dd>
+    <dt class="col-12"><a href="{{ path('user_edit') }}">Modifier mon profil</a></dt>
+    <dt class="col-12"><a href="{{ path('user_edit_password') }}">Modifier mon mot de passe</a></dt>
+    <dt class="col-12"><a href="{{ path('session_add') }}">Créer une partie</a></dt>
 </dl>
 
-<a href="{{ path('session_add') }}">Créer une session</a>
-
 <ul>
+    Mes parties : <br>
     {% for session in sessions %}
         <li>
             <a href="{{ path('session_show', {id: session.id}) }}">{{ session.name }}</a>
@@ -25,5 +27,9 @@
         </li>
     {% endfor %}
 </ul>
+
+<dl class="row">
+    <dt class="col-12"><a href="{{ path('user_delete') }}">Supprimer mon profil</a></dt>
+</dl>
 
 {% endblock %}

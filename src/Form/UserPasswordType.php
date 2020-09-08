@@ -19,8 +19,8 @@ class UserPasswordType extends AbstractType
                 'type' => PasswordType::class,
                 'constraints' => new NotBlank(),
                 'invalid_message' => 'The password fields must match.',
-                'first_options'  => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Répéter le mot de passe'),
+                'first_options'  => array('label' => 'Nouveau mot de passe'),
+                'second_options' => array('label' => 'Répéter le nouveau mot de passe'),
             )
         );
     }

@@ -12,7 +12,7 @@ use App\Repository\UserRepository;
 use App\Repository\SessionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -124,6 +124,26 @@ class UserController extends AbstractController
         return $this->render('user/edit_password.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/user/delete", name="user_delete")
+     */
+    public function delete()
+    {
+        $user = $this->getUser();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Compte utilisateur supprimé');
+
+        $session = new Session();
+        $session->invalidate();
+
+        return $this->redirectToRoute('logout');
+        ;
     }
 
     /**

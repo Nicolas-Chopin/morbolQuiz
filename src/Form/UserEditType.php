@@ -15,15 +15,14 @@ class UserEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, [
-                'constraints' => new NotBlank,
-            ])
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new Email,
                     new NotBlank,
                 ],
             ])
+            ->add('firstname')
+            ->add('lastname')
         ;
     }
 
