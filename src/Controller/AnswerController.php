@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Session;
-use App\Entity\Question;
-use App\Form\QuestionType;
+use App\Form\AnswerType;
 use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
 use Symfony\Component\HttpFoundation\Request;

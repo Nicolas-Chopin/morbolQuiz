@@ -3,12 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Answer;
-use App\Entity\Menu;
-use App\Entity\Category;
-use App\Entity\Question;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AnswerType extends AbstractType
@@ -17,19 +13,8 @@ class AnswerType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('orderInNuggets')
-            ->add('orderInSaltpepper')
-            ->add('orderInMenu')
-            ->add('orderInSum')
-            ->add('orderInDeathquiz')
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'expanded' => true,
-            ])
-            ->add('menu', EntityType::class, [
-                'class' => Menu::class,
-                'placeholder' => 'Aucun',
-            ]);
+            ->add('answerOrder')
+            ->add('isCorrect');
     }
 
     public function configureOptions(OptionsResolver $resolver)

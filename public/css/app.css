@@ -1,3 +1,68 @@
+@font-face {
+    font-family: "Dimbo";
+    src: url('../fonts/DimboRegular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/DimboRegular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../fonts/DimboRegular.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+        url('../fonts/DimboRegular.woff2') format('woff2'), /* Super modern browsers */
+        url('../fonts/DimboRegular.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('../fonts/DimboRegular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+@font-face {
+    font-family: "Dimbo";
+    src: url('../fonts/DimboItalic.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/DimboItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../fonts/DimboItalic.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+        url('../fonts/DimboItalic.woff2') format('woff2'), /* Super modern browsers */
+        url('../fonts/DimboItalic.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('../fonts/DimboItalic.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-style: italic;
+}
+@font-face {
+    font-family: "Horseshoes";
+    src: url('../fonts/HorseshoesAndLemonade.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/HorseshoesAndLemonade.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../fonts/HorseshoesAndLemonade.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+        url('../fonts/HorseshoesAndLemonade.woff2') format('woff2'), /* Super modern browsers */
+        url('../fonts/HorseshoesAndLemonade.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('../fonts/HorseshoesAndLemonade.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+* {
+    font-family: 'Dimbo', sans-serif;
+    color: ivory;
+}
+
 html {
     overflow-y: scroll;
+    background: black;
+    font-size: 1.5rem;
+}
+
+body, ul {
+    background: black;
+}
+
+h1, h2, .nav-link {
+    font-family: 'Horseshoes', sans-serif;
+    color: ivory;
+}
+
+input {
+    background: rgb(70, 70, 70);
+}
+
+.font-horse {
+    font-family: 'Horseshoes', sans-serif;
+}
+
+.nav-item a:hover {
+    color: green;
+}
+
+i a:hover {
+    text-decoration: none;
+}
+
+.list-group, .list-group-item, .list-group-flush {
+    background: black;
 }
