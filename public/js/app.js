@@ -88,6 +88,20 @@ let app = {
             .then(document.getElementById("b-score").innerHTML = --bScoreFetched);
           }
         },);
+        // target + event resolve for answers' visibility at click
+        let answerTrigger = document.querySelectorAll(".answer-letter");
+        answerTrigger.forEach(element => {
+          element.addEventListener("click", function () {
+            element.firstElementChild.classList.remove("hidden")
+          })
+        });
+        // target + event resolve for is answer correct at click
+        let trigger = document.getElementById("soluce");
+        trigger.addEventListener("click", function() {
+          answerTrigger.forEach(element => {
+            element.firstElementChild.classList.remove("text-ivory")
+          })
+        });
         // target + event reset A team's score
         let resetA = document.getElementById("reset-a-team");
         resetA.addEventListener("click", function () {
@@ -112,6 +126,7 @@ let app = {
           .then(document.getElementById("b-score").innerHTML = 0)
           .then(bScoreFetched = 0);
         },);
+        
     },    
 
     //--------------------------------------------------------------------

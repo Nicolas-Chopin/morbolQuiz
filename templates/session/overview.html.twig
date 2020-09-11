@@ -7,7 +7,6 @@
 
 <h1>Gestion de la partie : {{ session.name }}</h1>
 
-<div class="example-wrapper">
     <ul class="nav nav-tabs container-fluid sticky-top" id="myTab" role="tablist">
         <li class="nav-item " role="presentation">
             <a class="nav-link active text-center" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
@@ -37,6 +36,9 @@
 
     <div class="tab-content" id="myTabContent">
 
+        {###################
+        ****** HOMETAB *****
+        ####################}
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div>Nom de la partie : <span class="text-warning font-horse">{{ session.name }}</span></div>
             <div>Nom de la première équipe : <span class="text-danger font-horse">{{ session.aTeamName }}</span></div>
@@ -45,78 +47,98 @@
             <div>Image de la seconde équipe : <span class="text-warning font-horse">{{ session.bTeamImgUrl }}</span></div>
             <div>Thème du Sel ou poivre : <span class="text-danger font-horse">{{ session.sorpName }}</span></div>
             <div>Thème de l'addition : <span class="text-warning font-horse">{{ session.sumName }}</span></div>
-            <a href="{{ path('session_edit', {id: session.id}) }}" class="text-decoration-none btn btn-outline-warning">
+            <a href="{{ path('session_edit', {id: session.id}) }}" class="btn text-warning">
                 Modifier les paramètres de la partie <i class="fas fa-edit text-warning"></i>
             </a>
             <a href="{{ path('session_delete', {id: session.id}) }}"
-                class="text-decoration-none btn btn-outline-danger">
+                class="btn text-danger">
                 Supprimer la partie <i class="fas fa-trash text-danger"></i>
             </a>
         </div>
 
+        {###################
+        ****** NUGGETS *****
+        ####################}
         <div class="tab-pane fade" id="nuggets" role="tabpanel" aria-labelledby="nuggets-tab">
             <h3>
                 {{ nuggets.name }} - 6 questions (3 par équipe)
                 <a href="{{ path('nuggets_add', {id: session.id}) }}"
-                    class="text-success text-decoration-none btn">
+                    class="text-success btn">
                     Ajouter un nugget <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">
                 {% for nuggetsQuestion in nuggetsQuestions %}
-                <li class="list-group-item">
+                <li class="question list-group-item row">
                     {% if nuggetsQuestion is defined and nuggetsQuestion.orderInNuggets < 7 %}
-                    Question {{ nuggetsQuestion.orderInNuggets }} : {{ nuggetsQuestion.text }}
-                    <a href="{{ path('nuggets_edit', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" onclick="return confirm('Confirmer la suppression')" class="text-decoration-none btn">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>                    
+                    <span class="col-10">
+                        Question {{ nuggetsQuestion.orderInNuggets }} : {{ nuggetsQuestion.text }}
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('nuggets_edit', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="btn p-0">
+                            <i class="fas fa-edit text-warning icon-q"></i>
+                        </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" onclick="return confirm('Confirmer la suppression')" class="btn p-0">
+                            <i class="fas fa-trash text-danger icon-q"></i>
+                        </a>
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('answer_add', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-success btn p-0">
+                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                        </a>  
+                    </span>            
                     <ul class="list-unstyled">
-                        <li class="list-group-item answer">
-                            <a href="{{ path('answer_add', {id: session.id, idQuestion: nuggetsQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
-                            </a>
-                        </li>
                         {% for nuggetsAnswer in nuggetsQuestion.answers %}
-                        <li class="list-group-item answer">
-                            Réponse {{ nuggetsAnswer.answerOrder }} : {{ nuggetsAnswer.text }}
-                            <a href="{{ path('answer_edit', {id: session.id, idQuestion: nuggetsQuestion.id, idAnswer: nuggetsAnswer.id}) }}" class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('answer_delete', {id: session.id, idQuestion: nuggetsQuestion.id, idAnswer: nuggetsAnswer.id}) }}"
-                                onclick="return confirm('Confirmer la suppression')" class="btn text-decoration-none text-warning">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
+                        <li class="answer list-group-item row">
+                            <span class="col-11">
+                                Réponse {{ nuggetsAnswer.answerOrder }} : {{ nuggetsAnswer.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_edit', {id: session.id, idQuestion: nuggetsQuestion.id, idAnswer: nuggetsAnswer.id}) }}" class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-a"></i>
+                                </a>
+                                <a href="{{ path('answer_delete', {id: session.id, idQuestion: nuggetsQuestion.id, idAnswer: nuggetsAnswer.id}) }}"
+                                    onclick="return confirm('Confirmer la suppression')" class="btn text-warning p-0">
+                                    <i class="fas fa-trash text-danger icon-a"></i>
+                                </a>
+                            </span>
+                            
                         </li>
                         {% endfor %}
                     </ul>
                     {% endif %}
                     {% if nuggetsQuestion.orderInNuggets > 6 %}
-                    Question en surplus : elle ne sera pas présentée pendant la partie. <br>
-                    {{ nuggetsQuestion.text }}
-                    <a href="{{ path('nuggets_edit', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" onclick="return confirm('Supprimer ce nugget ?')" class="text-danger text-decoration-none btn">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
+                    <ul class="list-group list-group-flush">
+                        <h3>Question en surplus : elle ne sera pas présentée pendant la partie.</h3>
+                        <li class="question list-group-item row">
+                            <span class="col-10">
+                                {{ nuggetsQuestion.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('nuggets_edit', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-q"></i>
+                                </a>
+                                <a href="{{ path('question_delete', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" onclick="return confirm('Supprimer ce nugget ?')" class="text-danger btn p-0">
+                                    <i class="fas fa-trash text-danger icon-q"></i>
+                                </a>
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_add', {id: session.id, idQuestion: nuggetsQuestion.id}) }}" class="text-success btn">
+                                    Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
                     <ul class="list-unstyled">
-                        <a href="{{ path('answer_add', {id: session.id, idQuestion: nuggetsQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
-                        </a>
                         {% for nuggetsAnswer in nuggetsQuestion.answers %}
                         <li class="list-group-item answer">
                             Réponse {{ loop.index }} : {{ nuggetsAnswer.text }}
                             <a href="{{ path('answer_edit', {id: session.id, idQuestion: nuggetsQuestion.id, idAnswer: nuggetsAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
+                                class="text-warning btn">
                                 <i class="fas fa-edit text-warning"></i>
                             </a>
                             <a href="{{ path('answer_delete', {id: session.id, idQuestion: nuggetsQuestion.id, idAnswer: nuggetsAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
+                                class="text-danger btn"
                                 onclick="return confirm('Confirmer la suppression')">
                                 <i class="fas fa-trash text-danger"></i>
                             </a>
@@ -132,75 +154,102 @@
             </ul>
         </div>
 
+        {###################
+        ******* SORP *******
+        ####################}
         <div class="tab-pane fade" id="sorp" role="tabpanel" aria-labelledby="sorp-tab">
             <h3>
                 {{ salt.name }} : {{ session.sorpName }} - 10 questions
                 <a href="{{ path('sorp_add', {id: session.id}) }}"
-                    class="text-success text-decoration-none btn">
+                    class="text-success btn">
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">{% for sorpQuestion in sorpQuestions %}
-                <li class="list-group-item">
+                <li class="question list-group-item row">
                     {% if sorpQuestion is defined and sorpQuestion.orderInSaltpepper < 11 %}
-                    Question {{ sorpQuestion.orderInSaltpepper }} : {{ sorpQuestion.text }}
-                    <a href="{{ path('sorp_edit', {id: session.id, idQuestion: sorpQuestion.id}) }}"
-                        class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: sorpQuestion.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
-                    <ul class="list-unstyled">
-                        <a href="{{ path('answer_add', {id: session.id, idQuestion: sorpQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
+                    <span class="col-10">
+                        Question {{ sorpQuestion.orderInSaltpepper }} : {{ sorpQuestion.text }}
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('sorp_edit', {id: session.id, idQuestion: sorpQuestion.id}) }}"
+                        class="text-warning btn p-0">
+                        <i class="fas fa-edit text-warning icon-q"></i>
                         </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: sorpQuestion.id}) }}"
+                            class="text-danger btn p-0" onclick="return confirm('Confirmer la suppression')">
+                            <i class="fas fa-trash text-danger icon-q"></i>
+                        </a>
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('answer_add', {id: session.id, idQuestion: sorpQuestion.id}) }}" class="text-success btn p-0">
+                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                        </a>
+                    </span>
+                    <ul class="list-unstyled">
                         {% for sorpAnswer in sorpQuestion.answers %}
-                        <li class="list-group-item answer">
-                            Réponse : {{ sorpAnswer.text }}
-                            <a href="{{ path('answer_edit', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('answer_delete', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
-                                onclick="return confirm('Confirmer la suppression')">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
+                        <li class="answer list-group-item row">
+                            <span class="col-11">
+                                Réponse : {{ sorpAnswer.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_edit', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-a"></i>
+                                </a>
+                                <a href="{{ path('answer_delete', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
+                                    class="text-danger btn p-0"
+                                    onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-a"></i>
+                                </a>
+                            </span>
                         </li>
                         {% endfor %}
                     </ul>
                     {% endif %}
                     {% if sorpQuestion.orderInSaltpepper > 10 %}
-                    Question en surplus : elle ne sera pas présentée pendant la partie. <br>
-                    {{ sorpQuestion.text }}
-                    <a href="{{ path('sorp_edit', {id: session.id, idQuestion: sorpQuestion.id}) }}"
-                        class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: sorpQuestion.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
-                    <ul class="list-unstyled">
-                        <a href="{{ path('answer_add', {id: session.id, idQuestion: sorpQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
-                        </a>
+                    <ul class="list-group list-group-flush">
+                        <h3> Question en surplus : elle ne sera pas présentée pendant la partie.</h3>   
+                        <li class="question list-group-item row">
+                            <span class="col-10">
+                                {{ sorpQuestion.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('sorp_edit', {id: session.id, idQuestion: sorpQuestion.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-q"></i>
+                                </a>
+                                <a href="{{ path('question_delete', {id: session.id, idQuestion: sorpQuestion.id}) }}"
+                                    class="text-danger btn p-0" onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-q"></i>
+                                </a>
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_add', {id: session.id, idQuestion: sorpQuestion.id}) }}"
+                                    class="text-success btn p-0">
+                                    Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                    
+                    <ul class="list-unstyled">    
                         {% for sorpAnswer in sorpQuestion.answers %}
-                        <li class="list-group-item answer">
-                            Réponse : {{ sorpAnswer.text }}
-                            <a href="{{ path('answer_edit', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('answer_delete', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
-                                onclick="return confirm('Confirmer la suppression')">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
+                        <li class="list-group-item answer row">
+                            <span class="col-11">
+                                Réponse : {{ sorpAnswer.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_edit', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-a"></i>
+                                </a>
+                                <a href="{{ path('answer_delete', {id: session.id, idQuestion: sorpQuestion.id, idAnswer: sorpAnswer.id}) }}"
+                                    class="text-danger btn p-0"
+                                    onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-a"></i>
+                                </a>
+                            </span>
                         </li>
                         {% endfor %}
                     </ul>
@@ -212,59 +261,81 @@
                 {% endfor %}</ul>
         </div>
 
+        {###################
+        ******* MENUS ******
+        ####################}
         <div class="tab-pane fade" id="menus" role="tabpanel" aria-labelledby="menus-tab">
             <h3>
                 {{ menus.name }} - 3 menus
                 <a href="{{ path('menu_add', {id: session.id}) }}"
-                    class="text-success text-decoration-none btn">
+                    class="text-success btn">
                     Ajouter un menu <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">{% for menusName in menusNames %}
-                <li class="list-group-item">
-                    Menu {{loop.index}} : {{ menusName.name }} - 5 questions par menu
-                    <a href="{{ path('menu_edit', {id: session.id, idMenu: menusName.id}) }}"
-                        class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('menu_delete', {id: session.id, idMenu: menusName.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
-                    <a href="{{ path('menu_question_add', {id: session.id, idMenu: menusName.id}) }}"
-                        class="text-success text-decoration-none btn">
-                        Ajouter une question aux menus <i class="fas fa-plus-circle text-success"></i>
-                    </a>
+                <li class="list-group-item question row">
+                    <div class="sticky-top sticky-top-2">
+                        <span class="col-10 h3">                       
+                            Menu {{ menusName.menuOrder }} : {{ menusName.name }} - 5 questions par menu
+                        </span>
+                        <span class="col-1">
+                            <a href="{{ path('menu_edit', {id: session.id, idMenu: menusName.id}) }}"
+                                class="text-warning btn p-0">
+                                <i class="fas fa-edit text-warning icon-q"></i>
+                            </a>
+                            <a href="{{ path('menu_delete', {id: session.id, idMenu: menusName.id}) }}"
+                                class="text-danger btn p-0" onclick="return confirm('Confirmer la suppression')">
+                                <i class="fas fa-trash text-danger icon-q"></i>
+                            </a>
+                        </span>
+                        <span class="col-1">
+                            <a href="{{ path('menu_question_add', {id: session.id, idMenu: menusName.id}) }}"
+                                class="text-success btn p-0">
+                                Ajouter une question aux menus <i class="fas fa-plus-circle text-success icon-q"></i>
+                            </a>
+                        </span>
+                    </div>
+                    
                     <ul class="list-unstyled">{% for menusQuestion in menusQuestions %}
                         {% if menusQuestion and menusQuestion.menu == menusName.name %}
-                        <li class="list-group-item">
-                            Question {{ menusQuestion.orderInMenu }} : {{ menusQuestion.text }}
-                            <a href="{{ path('menu_question_edit', {id: session.id, idQuestion: menusQuestion.id, idMenu: menusName.id}) }}"
-                                class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('question_delete', {id: session.id, idQuestion: menusQuestion.id}) }}"
-                                class="text-danger text-decoration-none btn"
-                                onclick="return confirm('Confirmer la suppression')">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
-                            <ul class="list-unstyled">
-                                <a href="{{ path('answer_add', {id: session.id, idQuestion: menusQuestion.id}) }}"
-                                    class="text-success text-decoration-none btn">
-                                    Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
+                        <li class="list-group-item question row">
+                            <span class="col-10">
+                                Question {{ menusQuestion.orderInMenu }} : {{ menusQuestion.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('menu_question_edit', {id: session.id, idQuestion: menusQuestion.id, idMenu: menusName.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-q"></i>
                                 </a>
+                                <a href="{{ path('question_delete', {id: session.id, idQuestion: menusQuestion.id}) }}"
+                                    class="text-danger btn p-0"
+                                    onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-q"></i>
+                                </a>
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_add', {id: session.id, idQuestion: menusQuestion.id}) }}"
+                                    class="text-success btn p-0">
+                                    Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                                </a>
+                            </span>                            
+                            <ul class="list-unstyled">  
                                 {% for menusAnswer in menusQuestion.answers %}
-                                <li class="list-group-item answer">
-                                    Réponse {{ loop.index }} : {{ menusAnswer.text }}
-                                    <a href="{{ path('answer_edit', {id: session.id, idQuestion: menusQuestion.id, idAnswer: menusAnswer.id}) }}"
-                                        class="text-warning text-decoration-none btn">
-                                        <i class="fas fa-edit text-warning"></i>
-                                    </a>
-                                    <a href="{{ path('answer_delete', {id: session.id, idQuestion: menusQuestion.id, idAnswer: menusAnswer.id}) }}"
-                                        class="text-danger text-decoration-none btn"
-                                        onclick="return confirm('Confirmer la suppression')">
-                                        <i class="fas fa-trash text-danger"></i>
-                                    </a>
+                                <li class="list-group-item answer row">
+                                    <span class="col-11">
+                                        Réponse {{ menusAnswer.answerOrder }} : {{ menusAnswer.text }}
+                                    </span>
+                                    <span class="col-1">
+                                        <a href="{{ path('answer_edit', {id: session.id, idQuestion: menusQuestion.id, idAnswer: menusAnswer.id}) }}"
+                                            class="text-warning btn p-0">
+                                            <i class="fas fa-edit text-warning icon-a"></i>
+                                        </a>
+                                        <a href="{{ path('answer_delete', {id: session.id, idQuestion: menusQuestion.id, idAnswer: menusAnswer.id}) }}"
+                                            class="text-danger btn p-0"
+                                            onclick="return confirm('Confirmer la suppression')">
+                                            <i class="fas fa-trash text-danger icon-a"></i>
+                                        </a>
+                                    </span>
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -281,45 +352,57 @@
                 {% endfor %}</ul>
         </div>
 
+        {###################
+        ******** SUM *******
+        ####################}
         <div class="tab-pane fade" id="sum" role="tabpanel" aria-labelledby="sum-tab">
             <h3>
                 {{ sum.name }} : {{ session.sumName }} - 10 questions
-                <a href="{{ path('session_edit', {id: session.id}) }}" class="text-warning text-decoration-none btn">
-                    <i class="fas fa-edit text-warning"></i>
-                </a>
-                <a href="{{ path('sum_add', {id: session.id}) }}" class="text-success text-decoration-none btn">
+                <a href="{{ path('sum_add', {id: session.id}) }}" class="text-success btn">
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">{% for sumQuestion in sumQuestions %}
-                <li class="list-group-item">
+                <li class="list-group-item question row">
                     {% if sumQuestion is defined and sumQuestion.orderInSum < 11 %}
-                    Question {{ sumQuestion.orderInSum }} : {{ sumQuestion.text }}
-                    <a href="{{ path('sum_edit', {id: session.id, idQuestion: sumQuestion.id}) }}"
-                        class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: sumQuestion.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
-                    <ul class="list-unstyled">
-                        <a href="{{ path('answer_add', {id: session.id, idQuestion: sumQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
+                    <span class="col-10">
+                        Question {{ sumQuestion.orderInSum }} : {{ sumQuestion.text }}
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('sum_edit', {id: session.id, idQuestion: sumQuestion.id}) }}"
+                            class="text-warning btn p-0">
+                            <i class="fas fa-edit text-warning icon-q"></i>
                         </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: sumQuestion.id}) }}"
+                            class="text-danger btn p-0" onclick="return confirm('Confirmer la suppression')">
+                            <i class="fas fa-trash text-danger icon-q"></i>
+                        </a>
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('answer_add', {id: session.id, idQuestion: sumQuestion.id}) }}"
+                            class="text-success btn p-0">
+                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                        </a>
+                    </span>
+                    
+                    <ul class="list-unstyled">
                         {% for sumAnswer in sumQuestion.answers %}
-                        <li class="list-group-item answer">
-                            Réponse {{ loop.index }} : {{ sumAnswer.text }}
-                            <a href="{{ path('answer_edit', {id: session.id, idQuestion: sumQuestion.id, idAnswer: sumAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('answer_delete', {id: session.id, idQuestion: sumQuestion.id, idAnswer: sumAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
-                                onclick="return confirm('Confirmer la suppression')">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
+                        <li class="list-group-item answer row">
+                            <span class="col-11">
+                                Réponse {{ sumAnswer.answerOrder }} : {{ sumAnswer.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_edit', {id: session.id, idQuestion: sumQuestion.id, idAnswer: sumAnswer.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-a"></i>
+                                </a>
+                                <a href="{{ path('answer_delete', {id: session.id, idQuestion: sumQuestion.id, idAnswer: sumAnswer.id}) }}"
+                                    class="text-danger btn p-0"
+                                    onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-a"></i>
+                                </a>
+                            </span>
+                            
                         </li>
                         {% endfor %}
                     </ul>
@@ -328,27 +411,27 @@
                     Question en surplus : elle ne sera pas présentée pendant la partie. <br>
                     {{ sumQuestion.text }}
                     <a href="{{ path('sum_edit', {id: session.id, idQuestion: sumQuestion.id}) }}"
-                        class="text-warning text-decoration-none btn">
+                        class="text-warning btn">
                         <i class="fas fa-edit text-warning"></i>
                     </a>
                     <a href="{{ path('question_delete', {id: session.id, idQuestion: sumQuestion.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
+                        class="text-danger btn" onclick="return confirm('Confirmer la suppression')">
                         <i class="fas fa-trash text-danger"></i>
                     </a>
                     <ul class="list-unstyled">
                         <a href="{{ path('answer_add', {id: session.id, idQuestion: sumQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
+                            class="text-success btn">
                             Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
                         </a>
                         {% for sumAnswer in sumQuestion.answers %}
                         <li class="list-group-item answer">
                             Réponse {{ loop.index }} : {{ sumAnswer.text }}
                             <a href="{{ path('answer_edit', {id: session.id, idQuestion: sumQuestion.id, idAnswer: sumAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
+                                class="text-warning btn">
                                 <i class="fas fa-edit text-warning"></i>
                             </a>
                             <a href="{{ path('answer_delete', {id: session.id, idQuestion: sumQuestion.id, idAnswer: sumAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
+                                class="text-danger btn"
                                 onclick="return confirm('Confirmer la suppression')">
                                 <i class="fas fa-trash text-danger"></i>
                             </a>
@@ -364,77 +447,105 @@
                 {% endfor %}</ul>
         </div>
 
+        {###################
+        **** DEATH QUIZ ****
+        ####################}
         <div class="tab-pane fade" id="death" role="tabpanel" aria-labelledby="death-tab">
             <h3>
                 {{ deathMorbol.name }} - 10 questions
                 <a href="{{ path('death_add', {id: session.id}) }}"
-                    class="text-success text-decoration-none btn">
+                    class="text-success btn">
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">{% for deathQuestion in deathQuestions %}
-                <li class="list-group-item">
+                <li class="list-group-item question row">
                     {% if deathQuestion is defined and deathQuestion.orderInDeathquiz < 11 %}
-                    Question {{ deathQuestion.orderInDeathquiz }} : {{ deathQuestion.text }}
-                    <a href="{{ path('death_edit', {id: session.id, idQuestion: deathQuestion.id}) }}"
-                        class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: deathQuestion.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
-                    <ul class="list-unstyled">
-                        <a href="{{ path('answer_add', {id: session.id, idQuestion: deathQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
+                    <span class="col-10">
+                        Question {{ deathQuestion.orderInDeathquiz }} : {{ deathQuestion.text }}
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('death_edit', {id: session.id, idQuestion: deathQuestion.id}) }}"
+                            class="text-warning btn p-0">
+                            <i class="fas fa-edit text-warning icon-q"></i>
                         </a>
+                        <a href="{{ path('question_delete', {id: session.id, idQuestion: deathQuestion.id}) }}"
+                            class="text-danger btn p-0" onclick="return confirm('Confirmer la suppression')">
+                            <i class="fas fa-trash text-danger icon-q"></i>
+                        </a>
+                    </span>
+                    <span class="col-1">
+                        <a href="{{ path('answer_add', {id: session.id, idQuestion: deathQuestion.id}) }}"
+                            class="text-success btn p-0">
+                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                        </a>
+                    </span>
+                    
+                    <ul class="list-unstyled">
                         {% for deathAnswer in deathQuestion.answers %}
-                        <li class="list-group-item answer">
-                            Réponse : {{ deathAnswer.text }}
-                            <a href="{{ path('answer_edit', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('answer_delete', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
-                                onclick="return confirm('Confirmer la suppression')">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
+                        <li class="list-group-item answer row">
+                            <span class="col-11">
+                                Réponse : {{ deathAnswer.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_edit', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-a"></i>
+                                </a>
+                                <a href="{{ path('answer_delete', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
+                                    class="text-danger btn p-0"
+                                    onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-a"></i>
+                                </a>
+                            </span>
                         </li>
                         {% endfor %}
                     </ul>
                     {% endif %}
                     {% if deathQuestion.orderInDeathquiz > 10 %}
-                    Question en surplus : elle ne sera pas présentée pendant la partie. <br>
-                    {{ deathQuestion.text }}
-                    <a href="{{ path('death_edit', {id: session.id, idQuestion: deathQuestion.id}) }}"
-                        class="text-warning text-decoration-none btn">
-                        <i class="fas fa-edit text-warning"></i>
-                    </a>
-                    <a href="{{ path('question_delete', {id: session.id, idQuestion: deathQuestion.id}) }}"
-                        class="text-danger text-decoration-none btn" onclick="return confirm('Confirmer la suppression')">
-                        <i class="fas fa-trash text-danger"></i>
-                    </a>
-                    <ul class="list-unstyled">
-                        <a href="{{ path('answer_add', {id: session.id, idQuestion: deathQuestion.id}) }}"
-                            class="text-success text-decoration-none btn">
-                            Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success"></i>
-                        </a>
-                        {% for deathAnswer in deathQuestion.answers %}
-                        <li class="list-group-item answer">
-                            Réponse : {{ deathAnswer.text }}
-                            <a href="{{ path('answer_edit', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
-                                class="text-warning text-decoration-none btn">
-                                <i class="fas fa-edit text-warning"></i>
-                            </a>
-                            <a href="{{ path('answer_delete', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
-                                class="text-danger text-decoration-none btn"
-                                onclick="return confirm('Confirmer la suppression')">
-                                <i class="fas fa-trash text-danger"></i>
-                            </a>
+                    <ul class="list-group list-group-flush">
+                        <h3> Question en surplus : elle ne sera pas présentée pendant la partie.</h3>   
+                        <li class="question list-group-item row">
+                            <span class="col-10">
+                                {{ deathQuestion.text }}
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('death_edit', {id: session.id, idQuestion: deathQuestion.id}) }}"
+                                    class="text-warning btn p-0">
+                                    <i class="fas fa-edit text-warning icon-q"></i>
+                                </a>
+                                <a href="{{ path('question_delete', {id: session.id, idQuestion: deathQuestion.id}) }}"
+                                    class="text-danger btn p-0" onclick="return confirm('Confirmer la suppression')">
+                                    <i class="fas fa-trash text-danger icon-q"></i>
+                                </a>
+                            </span>
+                            <span class="col-1">
+                                <a href="{{ path('answer_add', {id: session.id, idQuestion: deathQuestion.id}) }}"
+                                    class="text-success btn p-0">
+                                    Ajouter une réponse à cette question <i class="fas fa-plus-circle text-success icon-q"></i>
+                                </a>
+                            </span>
+                            <ul class="list-unstyled">
+                                {% for deathAnswer in deathQuestion.answers %}
+                                <li class="list-group-item answer row">
+                                    <span class="col-11">
+                                        Réponse : {{ deathAnswer.text }}
+                                    </span>
+                                    <span class="col-1">
+                                        <a href="{{ path('answer_edit', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
+                                            class="text-warning btn p-0">
+                                            <i class="fas fa-edit text-warning icon-a"></i>
+                                        </a>
+                                        <a href="{{ path('answer_delete', {id: session.id, idQuestion: deathQuestion.id, idAnswer: deathAnswer.id}) }}"
+                                            class="text-danger btn p-0"
+                                            onclick="return confirm('Confirmer la suppression')">
+                                            <i class="fas fa-trash text-danger icon-a"></i>
+                                        </a>
+                                    </span>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </li>
-                        {% endfor %}
                     </ul>
                     {% endif %}
                 </li>
@@ -446,4 +557,4 @@
         </div>
 
     </div>
-    {% endblock %}
+{% endblock %}

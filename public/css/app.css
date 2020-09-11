@@ -42,9 +42,21 @@ body, ul {
     background: black;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
 h1, h2, .nav-link {
     font-family: 'Horseshoes', sans-serif;
     color: ivory;
+}
+
+.alpha {
+    list-style: upper-alpha;
 }
 
 input {
@@ -55,8 +67,32 @@ input {
     font-family: 'Horseshoes', sans-serif;
 }
 
+.text-ivory {
+    color: ivory !important;
+}
+
+.font-horse:hover {
+    text-decoration: none;
+    color: green;
+}
+
+.text-green {
+    color: green;
+}
+
 .nav-item a:hover {
     color: green;
+    border: none;
+}
+
+.nav-tabs .nav-link.active {
+    background: green;
+    border-color: green;
+    color: ivory;
+}
+
+.nav-tabs {
+    border-color: green;
 }
 
 i a:hover {
@@ -66,3 +102,45 @@ i a:hover {
 .list-group, .list-group-item, .list-group-flush {
     background: black;
 }
+
+.answer {
+    padding: 0em 1em;
+    font-size: 0.8em;
+}
+
+.question {
+    padding: 0em 1em 1em 1em;
+}
+
+.icon-q {
+    padding: 0em 0em 0.6em 0em;
+}
+
+.icon-a {
+    padding: 0em 0em 1em 0em;
+    font-size: 0.8em;
+}
+
+.icon-s {
+    font-size: 1.5em;
+}
+
+.sticky-top {
+    z-index: 5;
+}
+
+.sticky-top-2 {
+    top: 2.5em;
+    background: black;
+    z-index: 3;
+}
+
+.big-height {
+    min-height: 100%;
+}
+
+.centering {
+    top: 50em;
+}
+
+

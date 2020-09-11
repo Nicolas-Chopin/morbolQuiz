@@ -3,21 +3,25 @@
 {% block title %}{{ category.name }} : {{ session.name }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
+<div class="container-fluid">
 
-    <h2>{{ category.name }} : {{ session.name }}</h2>
+    <div class="text-center">
+        <h1>{{ category.name }} : {{ session.name }}</h1>
 
-    <h3>{{ session.sorpName }}</h3>
-
-    <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
+        <h2 class="p-5 m-5">{{ session.sorpName }}</h2>
+    </div>
     
-    <a href="{{ path('menus', {id: session.id}) }}">Les Menus</a>
-    
+    <div class="row">
+        <div class="col-2">
+            <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
+        </div>
+        <div class="col text-center">
+        </div>
+        <div class="col-2">
+            <a href="{{ path('menus', {id: session.id}) }}">Les Menus</a>
+        </div>
+    </div>       
 
 </div>
 {% endblock %}
