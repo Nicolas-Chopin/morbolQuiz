@@ -61,6 +61,10 @@ class AnswerController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette réponse n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
         $question = $questionRepository->findOneBy([
             'id' => $idQuestion,
@@ -105,6 +109,10 @@ class AnswerController extends AbstractController
         if ($session === null) {
             // 404 ?
             throw $this->createNotFoundException('Cette réponse n\'existe pas.');
+        }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
         }
 
         $question = $questionRepository->findOneBy([

@@ -25,6 +25,11 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        //creat user role
+        $roleU = new Role();
+        $roleU->setName('ROLE_USER');
+        $roleU->setCreatedAt(new \DateTime());
+        $manager->persist($roleU);
         //creat admin role
         $role = new Role();
         $role->setName('ROLE_ADMIN');

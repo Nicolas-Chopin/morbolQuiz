@@ -56,6 +56,11 @@ class MenuController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Ce menu n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $menu = $menuRepository->findOneBy([
             'id' => $idMenu,
         ]);
@@ -96,6 +101,11 @@ class MenuController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Ce menu n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $menu = $menuRepository->findOneBy([
             'id' => $idMenu,
         ]);

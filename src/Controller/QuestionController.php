@@ -71,6 +71,10 @@ class QuestionController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette question n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
         $category = $categoryRepository->findOneBy([
             'name' => 'Nuggets',
@@ -156,6 +160,10 @@ class QuestionController extends AbstractController
         if ($session === null) {
             // 404 ?
             throw $this->createNotFoundException('Cette question n\'existe pas.');
+        }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
         }
 
         $category = $categoryRepository->findOneBy([
@@ -247,6 +255,10 @@ class QuestionController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette question n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
         $category = $categoryRepository->findOneBy([
             'name' => "Menus",
@@ -337,6 +349,10 @@ class QuestionController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette question n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
         $category = $categoryRepository->findOneBy([
             'name' => "L'addition",
@@ -423,6 +439,10 @@ class QuestionController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette question n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
         $category = $categoryRepository->findOneBy([
             'name' => 'Morbol de la Mort',
@@ -472,6 +492,11 @@ class QuestionController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette question n\'existe pas.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+        
         $question = $questionRepository->findOneBy([
             'id' => $idQuestion,
         ]);

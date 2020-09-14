@@ -52,6 +52,10 @@ class GameController extends AbstractController
         if ($session === null) {
             throw $this->createNotFoundException('Session introuvable.');
         }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
         $categories = $categoryRepository->findAllOrderId();
         
@@ -147,6 +151,11 @@ class GameController extends AbstractController
             throw $this->createNotFoundException('Cette partie n\'existe pas.');
         }
 
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm(SessionType::class, $session);
 
         $form->handleRequest($request);
@@ -184,13 +193,18 @@ class GameController extends AbstractController
             // 404 ?
             throw $this->createNotFoundException('Cette partie n\'existe pas.');
         }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($session);
-            $entityManager->flush();
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
 
-            $this->addFlash('success', 'Session supprimée');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($session);
+        $entityManager->flush();
 
-            return $this->redirectToRoute('user_profile');
+        $this->addFlash('success', 'Session supprimée');
+
+        return $this->redirectToRoute('user_profile');
     }
     
     /**

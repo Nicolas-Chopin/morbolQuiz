@@ -71,7 +71,7 @@ class User implements UserInterface, \Serializable
     private $userRole;
 
     /**
-     * @ORM\OneToMany(targetEntity=Session::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Session::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $sessions;
 

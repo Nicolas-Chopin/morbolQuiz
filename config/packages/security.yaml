@@ -20,12 +20,15 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                username_parameter: login[_username]
-                password_parameter: login[_password]
+                #username_parameter: login[_username]
+                #password_parameter: login[_password]
 
             logout:
                 path:   /logout
                 target: /
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

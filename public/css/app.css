@@ -50,6 +50,13 @@ body, ul {
     display: none;
 }
 
+.logo-index {
+    background-image: url(../images/morbol.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    min-height: 427px;
+}
+
 h1, h2, .nav-link {
     font-family: 'Horseshoes', sans-serif;
     color: ivory;
@@ -65,6 +72,10 @@ input {
 
 .font-horse {
     font-family: 'Horseshoes', sans-serif;
+}
+
+.font-dimbo {
+    font-family: 'Dimbo', sans-serif;
 }
 
 .text-ivory {

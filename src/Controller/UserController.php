@@ -33,7 +33,7 @@ class UserController extends AbstractController
             // Encodage du mot de passe
             $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             // Assignartion du rôle par défaut VIA le nom du rôle et non l'ID
-            $role = $roleRepository->findOneByName('ROLE_ADMIN');
+            $role = $roleRepository->findOneByName('ROLE_USER');
             $user->setUserRole($role);
             $user->setIsEmailCheck(true);
             $user->setIsActive(true);

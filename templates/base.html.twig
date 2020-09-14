@@ -11,9 +11,43 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <div class="">
-            <h1 class="h1"><a href="{{ path('index') }}">Morbol Quiz</a></h1>
-        </div>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand p-0 m-0" href="{{ path('index') }}">
+                    <h1 class="text-green p-0 m-0">Morbol Quiz</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active font-dimbo" href="{{ path('user_profile') }}">Mon profil</a>                     
+                        <a class="nav-item nav-link active font-dimbo">Bienvenue 
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                                    {{ app.user.username }} (Administrateur)
+                                {% endif %}
+                                {% if app.user.roles[0] == 'ROLE_USER' %}
+                                    {{ app.user.username }}(Membre)
+                                {% endif %}
+                                {% else %}
+                                    visiteur (venu d'ailleurs)                          
+                            {% endif %}
+                         !</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a class="nav-item nav-link active btn btn-danger" href="{{ path('logout') }}">Logout</a>
+                        {% else %}
+                            <a href="{{ path('user_register') }}" class="nav-item nav-link active btn btn-info mr-1">Inscription</a>
+                            <a class="nav-item nav-link active btn btn-success" href="{{ path('login') }}">Login</a>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.roles[0] == 'ROLE_ADMIN' %}
+                            <a class="nav-item nav-link active font-dimbo" href="">Admin BackOffice</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
         {% block scores %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
