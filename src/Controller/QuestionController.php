@@ -145,7 +145,7 @@ class QuestionController extends AbstractController
             ]);
         }
 
-        return $this->render('question/addSorp.html.twig', [
+        return $this->render('question/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }

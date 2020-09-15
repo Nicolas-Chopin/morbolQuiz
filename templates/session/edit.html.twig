@@ -1,14 +1,16 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Modifier une session{% endblock %}
+{% block title %}Modifier une partie{% endblock %}
 
 {% block body %}
 
-<h1>Modifier une session</h1>
+<h1>Modifier une partie</h1>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary">Soumettre</button>
-{{ form_end(form) }}
+<div class="form-inline m-2">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary m-2">Enregistrer</button>
+    {{ form_end(form) }}
+</div>
 
 {% endblock %}

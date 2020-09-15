@@ -6,9 +6,11 @@
 
 <h1>Inscription</h1>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success">M'inscrire</button>
-{{ form_end(form) }}
+<div class="form-inline m-2">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-success m-2">M'inscrire</button>
+    {{ form_end(form) }}
+</div>
 
 {% endblock %}

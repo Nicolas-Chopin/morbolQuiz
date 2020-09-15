@@ -19,15 +19,22 @@ class RegisterType extends AbstractType
         $builder
             ->add('username', null, [
                 'constraints' => new NotBlank,
+                'label' => 'Identifiant',
+                'attr' => ['class' => 'col-12 mb-2'],
             ])
             ->add('password', PasswordType::class, [
                 'constraints' => new NotBlank,
+                'label' => 'Mot de passe',
+                'attr' => ['class' => 'col-12 mb-2'],
             ])
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new Email,
                     new NotBlank,
+                    'attr' => ['class' => 'col-12 mb-2'],
                 ],
+                'attr' => ['class' => 'col-12 mb-2'],
+                'label' => 'Adresse mail',
             ])
         ;
     }

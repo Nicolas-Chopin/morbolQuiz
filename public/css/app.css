@@ -67,7 +67,8 @@ h1, h2, .nav-link {
 }
 
 input {
-    background: rgb(70, 70, 70);
+    background: rgb(70, 70, 70) !important;
+    color: ivory !important;
 }
 
 .font-horse {
@@ -154,4 +155,11 @@ i a:hover {
     top: 50em;
 }
 
+#answer_isCorrect_0, #answer_isCorrect_1 {
+    transform: scale(1.5);
+    margin-top: 0.5em;
+}
 
+.form-check {
+    align-content: center;
+}

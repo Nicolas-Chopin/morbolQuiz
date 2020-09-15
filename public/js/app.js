@@ -89,18 +89,51 @@ let app = {
           }
         },);
         // target + event resolve for answers' visibility at click
+        // Same with keybind 1, 2, 3, 4
         let answerTrigger = document.querySelectorAll(".answer-letter");
         answerTrigger.forEach(element => {
           element.addEventListener("click", function () {
             element.firstElementChild.classList.remove("hidden")
           })
         });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === '1') {
+            answerTrigger[0].firstElementChild.classList.remove("hidden")
+          }
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === '2') {
+            answerTrigger[1].firstElementChild.classList.remove("hidden")
+          }
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === '3') {
+            answerTrigger[2].firstElementChild.classList.remove("hidden")
+          }
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === '4') {
+            answerTrigger[3].firstElementChild.classList.remove("hidden")
+          }
+        });
         // target + event resolve for is answer correct at click
+        // Same with Enter and 0 
         let trigger = document.getElementById("soluce");
         trigger.addEventListener("click", function() {
           answerTrigger.forEach(element => {
             element.firstElementChild.classList.remove("text-ivory")
           })
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter') {
+            answerTrigger.forEach(element => {
+              element.firstElementChild.classList.remove("text-ivory")
+            })
+          } else if (event.key === '0') {
+            answerTrigger.forEach(element => {
+              element.firstElementChild.classList.remove("text-ivory")
+            })
+          }
         });
         // target + event reset A team's score
         let resetA = document.getElementById("reset-a-team");

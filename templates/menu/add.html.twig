@@ -1,14 +1,16 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Ajouter un menu{% endblock %}
+{% block title %}Créer un menu{% endblock %}
 
 {% block body %}
 
-<h1>Ajouter un menu</h1>
+<h1>Creer un menu</h1>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary">Soumettre</button>
-{{ form_end(form) }}
+<div class="form-inline m-2">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary m-2">Créer</button>
+    {{ form_end(form) }}
+</div>
 
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Session;
 use App\Form\DataTransformer\AccentSkip;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SessionType extends AbstractType
@@ -20,13 +21,39 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('aTeamName')
-            ->add('bTeamName')
-            ->add('aTeamImgUrl')
-            ->add('bTeamImgUrl')
-            ->add('sorpName')
-            ->add('sumName');
+            ->add('name', null, [
+            'label' => 'Nom de la partie',
+            'attr' => ['class' => 'col-12 mb-2'],
+            'constraints' => new NotBlank(),
+            ])
+            ->add('aTeamName', null, [
+                'label' => 'Nom de l\'équipe 1',
+                'attr' => ['class' => 'col-12 mb-2 text-danger'],
+                'constraints' => new NotBlank(),
+                ])
+            ->add('bTeamName', null, [
+                'label' => 'Nom de l\'équipe 2',
+                'attr' => ['class' => 'col-12 mb-2 text-warning'],
+                'constraints' => new NotBlank(),
+                ])
+            ->add('aTeamImgUrl', null, [
+                'label' => 'Image de l\'équipe 1',
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
+            ->add('bTeamImgUrl', null, [
+                'label' => 'Image de l\'équipe 2',
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
+            ->add('sorpName', null, [
+                'label' => 'Thème du Sel ou poivre',
+                'attr' => ['class' => 'col-12 mb-2'],
+                'constraints' => new NotBlank(),
+                ])
+            ->add('sumName', null, [
+                'label' => 'Thème de l\'addition',
+                'attr' => ['class' => 'col-12 mb-2'],
+                'constraints' => new NotBlank(),
+                ]);
 
         $builder->get('name')
             ->addModelTransformer($this->accentSkip);

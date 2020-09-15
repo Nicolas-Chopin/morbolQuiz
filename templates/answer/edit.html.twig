@@ -4,11 +4,12 @@
 
 {% block body %}
 
-<h1>Modifier une réponse</h1>
+<h1>Modifier une reponse</h1>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary">Soumettre</button>
-{{ form_end(form) }}
-
+<div class="form-inline m-2">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary m-2">Enregistrer</button>
+    {{ form_end(form) }}
+</div>
 {% endblock %}

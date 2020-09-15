@@ -12,8 +12,10 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('role')
-        ;
+            ->add('role', null, [
+            'label' => 'Rôle',
+            'attr' => ['class' => 'col-12 mb-2']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -20,9 +20,17 @@ class UserEditType extends AbstractType
                     new Email,
                     new NotBlank,
                 ],
+                'label' => 'Adresse mail',
+                'attr' => ['class' => 'col-12 mb-2']
             ])
-            ->add('firstname')
-            ->add('lastname')
+            ->add('firstname', null, [
+                'label' => 'Prénom',
+                'attr' => ['class' => 'col-12 mb-2']
+            ])
+            ->add('lastname', null, [
+                'label' => 'Nom',
+                'attr' => ['class' => 'col-12 mb-2']
+            ])
         ;
     }
 

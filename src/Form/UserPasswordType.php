@@ -18,9 +18,11 @@ class UserPasswordType extends AbstractType
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'constraints' => new NotBlank(),
-                'invalid_message' => 'The password fields must match.',
+                'label' => 'Mot de passe',
+                'invalid_message' => 'Les mots de passe doivent être identiques.',
                 'first_options'  => array('label' => 'Nouveau mot de passe'),
                 'second_options' => array('label' => 'Répéter le nouveau mot de passe'),
+                'attr' => ['class' => 'col-12 mb-2']
             )
         );
     }
