@@ -41,7 +41,7 @@
                             <a class="nav-item nav-link active btn btn-success" href="{{ path('login') }}">Login</a>
                         {% endif %}
                         {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.roles[0] == 'ROLE_ADMIN' %}
-                            <a class="nav-item nav-link active font-dimbo" href="">Admin BackOffice</a>
+                            <a class="nav-item nav-link active font-dimbo" href="{{ path('admin') }}">Admin BackOffice</a>
                         {% endif %}
                     </div>
                 </div>
