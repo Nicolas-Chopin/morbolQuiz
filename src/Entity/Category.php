@@ -42,6 +42,7 @@ class Category
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->setCreatedAt(new \DateTime());
     }
 
     public function getId(): ?int

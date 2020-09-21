@@ -99,6 +99,7 @@ class Session
         $this->questions = new ArrayCollection();
         $this->menus = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->setCreatedAt(new \DateTime());
     }
 
     public function getId(): ?int

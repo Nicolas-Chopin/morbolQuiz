@@ -34,133 +34,82 @@
 
 html {
     overflow-y: scroll;
-    background: black;
+    background: black !important;
     font-size: 1.5rem;
 }
 
-body, ul {
-    background: black;
+body, .content-wrapper, aside, .content-header::before, .content-header::after, .content-header {
+    background: black !important;
 }
 
-.pointer {
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-
-.logo-index {
-    background-image: url(../images/morbol.png);
-    background-repeat: no-repeat;
-    background-position: right;
-    min-height: 427px;
-}
-
-h1, h2, .nav-link {
+.logo {
     font-family: 'Horseshoes', sans-serif;
+    color: green !important;
+    font-weight: normal;
+    font-size: 3em;
+}
+
+ul {
+    background: black;
     color: ivory;
 }
 
-.alpha {
-    list-style: upper-alpha;
-}
-
-input {
-    background: rgb(70, 70, 70) !important;
+i {
+    padding: 0.2em;
     color: ivory !important;
 }
 
-.font-horse {
-    font-family: 'Horseshoes', sans-serif;
+.title, .datagrid thead a, .datagrid thead span, .form-group label {
+    color: ivory;
 }
 
-.font-dimbo {
-    font-family: 'Dimbo', sans-serif;
+th {
+    background: rgb(50, 50, 50) !important;
 }
 
-.text-ivory {
-    color: ivory !important;
+.datagrid tbody tr:hover td, .datagrid tbody tr:hover th {
+    background: rgb(50, 50, 50) !important;
 }
 
-.font-horse:hover {
-    text-decoration: none;
-    color: green;
+tbody, .list-pagination, .content-panel-body.without-padding, .content-panel-body.without-footer {
+    background: rgb(77, 77, 77) !important;
 }
 
-.text-green {
-    color: green;
+.content-header {
+    color: ivory;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
-.nav-item a:hover {
-    color: green;
-    border: none;
+.content-panel {
+    border: grey solid 2px !important;
 }
 
-.nav-tabs .nav-link.active {
+.resizer-handler-left {
+    color: ivory;
+}
+
+.btn-secondary {
+    background: grey;
+    color: ivory;
+    border-radius: 5px;
+}    
+
+.btn-primary {
+    border-radius: 5px;
     background: green;
-    border-color: green;
-    color: ivory;
 }
 
-.nav-tabs {
-    border-color: green;
+a {
+    color: #8193eb;
 }
 
-i a:hover {
-    text-decoration: none;
+.action-edit {
+    color: #fcc257;
 }
 
-.list-group, .list-group-item, .list-group-flush {
-    background: black;
+.popover-body, .popover {
+    background: rgb(77, 77, 77) !important;  
+    border: ivory solid 1px;
+    border-radius: 5px;
 }
-
-.answer {
-    padding: 0em 1em;
-    font-size: 0.8em;
-}
-
-.question {
-    padding: 0em 1em 1em 1em;
-}
-
-.icon-q {
-    padding: 0em 0em 0.6em 0em;
-}
-
-.icon-a {
-    padding: 0em 0em 1em 0em;
-    font-size: 0.8em;
-}
-
-.icon-s {
-    font-size: 1.5em;
-}
-
-.sticky-top {
-    z-index: 5;
-}
-
-.sticky-top-2 {
-    top: 2.5em;
-    background: black;
-    z-index: 3;
-}
-
-.big-height {
-    min-height: 100%;
-}
-
-.centering {
-    top: 50em;
-}
-
-#answer_isCorrect_0, #answer_isCorrect_1 {
-    transform: scale(1.5);
-    margin-top: 0.5em;
-}
-
-.form-check {
-    align-content: center;
-}
-

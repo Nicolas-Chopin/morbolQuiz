@@ -11,7 +11,7 @@ use App\Entity\Category;
 use App\Entity\Question;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
@@ -58,5 +58,10 @@ class DashboardController extends AbstractDashboardController
 
 
         yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()->addCssFile('css/admin.css');
     }
 }

@@ -54,6 +54,11 @@ class Answer
      */
     private $session;
 
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

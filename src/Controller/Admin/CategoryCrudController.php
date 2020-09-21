@@ -3,6 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class CategoryCrudController extends AbstractCrudController
@@ -12,14 +16,21 @@ class CategoryCrudController extends AbstractCrudController
         return Category::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        $id = IdField::new('id');
+        $name = TextField::new('name', 'Nom'); 
+        $created = DateTimeField::new('createdAt', 'Créé le')->hideOnForm();
+        $updated = DateTimeField::new('updatedAt', 'Modifié le')->hideOnForm();
+
+        if (Crud::PAGE_NEW === $pageName) {
+            return [$name];
+        } elseif (Crud::PAGE_EDIT === $pageName) {
+            return [$name];
+        } else {
+            return [$id, $name, $created, $updated];
+        };
     }
-    */
+    
 }

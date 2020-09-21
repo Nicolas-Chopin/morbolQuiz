@@ -84,6 +84,7 @@ class Question
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->setCreatedAt(new \DateTime());
     }
 
     public function getId(): ?int
@@ -252,5 +253,10 @@ class Question
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->text;
     }
 }

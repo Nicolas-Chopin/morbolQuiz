@@ -78,6 +78,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
+        $this->setCreatedAt(new \DateTime());
     }
 
     public function getId(): ?int

@@ -18,6 +18,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     {
         $entity = $event->getAdminContext()->getEntity()->getInstance();
 
-        $entity->setUpdatedAt(new \DateTime());
+        if ($entity !== null) {
+            $entity->setUpdatedAt(new \DateTime());
+        }
+        
     }
 }
