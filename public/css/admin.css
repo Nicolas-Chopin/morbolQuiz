@@ -42,6 +42,8 @@ body, .content-wrapper, aside, .content-header::before, .content-header::after, 
     background: black !important;
 }
 
+
+
 .logo {
     font-family: 'Horseshoes', sans-serif;
     color: green !important;
