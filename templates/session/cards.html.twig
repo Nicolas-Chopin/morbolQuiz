@@ -1,0 +1,120 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion de la partie : {{ session.name }}{% endblock %}
+
+{% block body %}
+
+<h1>Gestion de la partie : {{ session.name }}</h1>
+
+    <ul class="nav nav-tabs container-fluid sticky-top" id="myTab" role="tablist">
+        <li class="nav-item " role="presentation">
+            <a class="nav-link active text-center" id="sorp-tab" data-toggle="tab" href="#sorp" role="tab" aria-controls="sorp"
+                aria-selected="false">{{ salt.name }}</a>
+        </li>
+        <li class="nav-item " role="presentation">
+            <a class="nav-link text-center" id="sum-tab" data-toggle="tab" href="#sum" role="tab" aria-controls="sum"
+                aria-selected="false">{{ sum.name }}</a>
+        </li>
+        <li class="nav-item " role="presentation">
+            <a class="nav-link text-center" id="death-tab" data-toggle="tab" href="#death" role="tab" aria-controls="death"
+                aria-selected="false">{{ deathMorbol.name }}</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+
+        {###################
+        ******* SORP *******
+        ####################}
+        <div class="tab-pane fade show active" id="sorp" role="tabpanel" aria-labelledby="sorp-tab">
+            <h3>
+                {{ salt.name }} : {{ session.sorpName }} - 10 questions
+            </h3>
+            <ul class="list-group list-group-flush">{% for sorpQuestion in sorpQuestions %}
+                <li class="question list-group-item row">
+                    {% if sorpQuestion is defined and sorpQuestion.orderInSaltpepper < 11 %}
+                    <span class="col-12">
+                        Question {{ sorpQuestion.orderInSaltpepper }} : {{ sorpQuestion.text }}
+                    </span>                    
+                    <ul class="list-unstyled">
+                        {% for sorpAnswer in sorpQuestion.answers %}
+                        <li class="answer list-group-item row">
+                            <span class="col-12">
+                                <span class="text-green">Réponse : </span>{{ sorpAnswer.text }}
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% if loop.length != 10 and loop.last %}
+                Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+                {% endfor %}</ul>
+        </div>
+
+        {###################
+        ******** SUM *******
+        ####################}
+        <div class="tab-pane fade" id="sum" role="tabpanel" aria-labelledby="sum-tab">
+            <h3>
+                {{ sum.name }} : {{ session.sumName }} - 10 questions
+            </h3>
+            <ul class="list-group list-group-flush">{% for sumQuestion in sumQuestions %}
+                <li class="list-group-item question row">
+                    {% if sumQuestion is defined and sumQuestion.orderInSum < 11 %}
+                    <span class="col-12">
+                        Question {{ sumQuestion.orderInSum }} : {{ sumQuestion.text }}
+                    </span>
+                    
+                    <ul class="list-unstyled">
+                        {% for sumAnswer in sumQuestion.answers %}
+                        <li class="list-group-item answer row">
+                            <span class="col-12">
+                                <span class="text-green">Réponse {{ sumAnswer.answerOrder }} : </span>{{ sumAnswer.text }}
+                            </span>                            
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% if loop.length != 10 and loop.last %}
+                Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+                </li>
+                {% endfor %}</ul>
+        </div>
+
+        {###################
+        **** DEATH QUIZ ****
+        ####################}
+        <div class="tab-pane fade" id="death" role="tabpanel" aria-labelledby="death-tab">
+            <h3>
+                {{ deathMorbol.name }} - 10 questions
+            </h3>
+            <ul class="list-group list-group-flush">{% for deathQuestion in deathQuestions %}
+                <li class="list-group-item question row">
+                    {% if deathQuestion is defined and deathQuestion.orderInDeathquiz < 11 %}
+                    <span class="col-12">
+                        Question {{ deathQuestion.orderInDeathquiz }} : {{ deathQuestion.text }}
+                    </span>                    
+                    <ul class="list-unstyled">
+                        {% for deathAnswer in deathQuestion.answers %}
+                        <li class="list-group-item answer row">
+                            <span class="col-12">
+                                <span class="text-green">Réponse : </span>{{ deathAnswer.text }}
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% if loop.length != 10 and loop.last %}
+                Le nombre total de question est incorrect. Merci d'en ajouter ou d'en supprimer.
+                {% endif %}
+                </li>
+            {% endfor %}</ul>
+        </div>
+
+    </div>
+{% endblock %}

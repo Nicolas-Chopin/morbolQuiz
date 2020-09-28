@@ -44,6 +44,7 @@
                             <th scope="row">{{ loop.index}}</th>
                             <td>{{ session.name }}</td>
                             <td><a href="{{ path('session_show', {id: session.id}) }}">Jouer cette partie</a></td>
+                            <td><a href="{{ path('session_cards', {id: session.id}) }}">Fiches de présentation</a></td>
                             <td><a href="{{ path('session_overview', {id: session.id}) }}">Gérer cette partie</a></td>
                         </tr>
                 {% endfor %}

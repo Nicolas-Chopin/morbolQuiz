@@ -47,7 +47,7 @@ class GameController extends AbstractController
     /**
      * @Route("/session/{id<\d+>}/overview", name="session_overview", methods={"GET"})
      */
-    public function sessionOverview($id, Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, MenuRepository $menuRepository, AnswerRepository $answerRepository)
+    public function sessionOverview($id, Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, MenuRepository $menuRepository)
     {
         if ($session === null) {
             throw $this->createNotFoundException('Session introuvable.');
@@ -91,6 +91,68 @@ class GameController extends AbstractController
         ],['menuOrder' => 'ASC']);
 
         return $this->render('session/overview.html.twig', [
+            'nuggets' => $categoryOne,
+            'salt' => $categoryTwo,
+            'menus' => $categoryThree,
+            'sum' => $categoryFour,
+            'deathMorbol' => $categoryFive,
+            'session' => $session,
+            'nuggetsQuestions' => $nuggetsQuestions,
+            'sorpQuestions' => $sorpQuestions,
+            'menusNames' => $menusNames,
+            'menusQuestions' => $menusQuestions,
+            'sumQuestions' => $sumQuestions,
+            'deathQuestions' => $deathQuestions,
+        ]);
+    }
+
+    /**
+     * @Route("/session/{id<\d+>}/cards", name="session_cards", methods={"GET"})
+     */
+    public function sessionCards($id, Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, MenuRepository $menuRepository)
+    {
+        if ($session === null) {
+            throw $this->createNotFoundException('Session introuvable.');
+        }
+        // Forbidden if you're not the owner
+        if ($session->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $categories = $categoryRepository->findAllOrderId();
+        
+        $categoryOne = $categories[0];
+        $categoryTwo = $categories[1];
+        $categoryThree = $categories[2];
+        $categoryFour = $categories[3];
+        $categoryFive = $categories[4];
+
+        $nuggetsQuestions = $questionRepository->findBy([
+            'category' => $categories[0],
+            'session' => $session,
+        ],['orderInNuggets' => 'ASC']);
+        $sorpQuestions = $questionRepository->findBy([
+            'category' => $categories[1],
+            'session' => $session,
+        ],['orderInSaltpepper' => 'ASC']);
+        $menusQuestions = $questionRepository->findBy([
+            'category' => $categories[2],
+            'session' => $session,
+        ],['orderInMenu' => 'ASC']);
+        $sumQuestions = $questionRepository->findBy([
+            'category' => $categories[3],
+            'session' => $session,
+        ],['orderInSum' => 'ASC']);
+        $deathQuestions = $questionRepository->findBy([
+            'category' => $categories[4],
+            'session' => $session,
+        ],['orderInDeathquiz' => 'ASC']);
+
+        $menusNames = $menuRepository->findBy([
+            'session' => $session,
+        ],['menuOrder' => 'ASC']);
+
+        return $this->render('session/cards.html.twig', [
             'nuggets' => $categoryOne,
             'salt' => $categoryTwo,
             'menus' => $categoryThree,
