@@ -41,7 +41,13 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div>Nom de la partie : <span class="text-warning font-horse">{{ session.name }}</span></div>
             <div>Nom de la première équipe : <span class="text-danger font-horse">{{ session.aTeamName }}</span></div>
+            <div class="ml-2">Joueur 1 (chef d'équipe) : <span class="text-danger">{{ session.aPlayerOne }}</span></div>
+            <div class="ml-2">Joueur 2 : <span class="text-danger">{{ session.aPlayerTwo }}</span></div>
+            <div class="ml-2">Joueur 3 : <span class="text-danger">{{ session.aPlayerThree }}</span></div>
             <div>Nom de la seconde équipe : <span class="text-warning font-horse">{{ session.bTeamName }}</span></div>
+            <div class="ml-2">Joueur 1 (chef d'équipe) : <span class="text-warning">{{ session.bPlayerOne }}</span></div>
+            <div class="ml-2">Joueur 2 : <span class="text-warning">{{ session.bPlayerTwo }}</span></div>
+            <div class="ml-2">Joueur 3 : <span class="text-warning">{{ session.bPlayerThree }}</span></div>
             <div>Image de la première équipe : <span class="text-danger font-horse">{{ session.aTeamImgUrl }}</span></div>
             <div>Image de la seconde équipe : <span class="text-warning font-horse">{{ session.bTeamImgUrl }}</span></div>
             <div>Thème du Sel ou poivre : <span class="text-danger font-horse">{{ session.sorpName }}</span></div>

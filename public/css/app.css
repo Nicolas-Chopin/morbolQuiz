@@ -164,3 +164,18 @@ i a:hover {
     align-content: center;
 }
 
+.crown-size {
+    font-size: 0.9em;
+}
+
+.footer-text {
+    font-size: 0.8em;
+}
+
+.border-header {
+    border-bottom: rgb(100, 100, 100) 2px solid;
+}
+
+.border-footer {
+    border-top: rgb(100, 100, 100) 2px solid;
+}

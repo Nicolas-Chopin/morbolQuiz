@@ -13,7 +13,7 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-header mb-1">
                 <a class="navbar-brand p-0 m-0" href="{{ path('index') }}">
                     <h1 class="text-green p-0 m-0">Morbol Quiz</h1>
                 </a>
@@ -51,6 +51,29 @@
         
         {% block scores %}{% endblock %}
         {% block body %}{% endblock %}
+
+        <footer class="page-footer bg-dark fixed-bottom">
+            <div class="container-fluid text-md-left border-footer">
+                <div class="row"> 
+                    <div class="col-12 col-lg-3 text-center footer-text">
+                        <a href="{{ path('patchnotes') }}">Patch notes</a>
+                    </div>
+                    <div class="col-12 col-lg-3 text-center footer-text">
+                        <a href="{{ path('about') }}">&#192; propos</a>
+                    </div>
+                    <div class="col-12 col-lg-3 text-center footer-text">
+                        <a href="{{ path('contact') }}">Contact</a>
+                    </div>
+                    <div class="col-12 col-lg-3 text-center footer-text">
+                        <a href="{{ path('legal-mentions') }}">Mentions légales</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright text-center text-green footer-text">
+                © 2020 Morbol Quiz
+            </div>          
+          </footer>
+
         {% block javascripts %}
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

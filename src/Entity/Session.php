@@ -94,6 +94,36 @@ class Session
      */
     private $answers;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $aPlayerOne;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $aPlayerTwo;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $aPlayerThree;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $bPlayerOne;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $bPlayerTwo;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $bPlayerThree;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -345,6 +375,78 @@ class Session
                 $answer->setSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAPlayerOne(): ?string
+    {
+        return $this->aPlayerOne;
+    }
+
+    public function setAPlayerOne(?string $aPlayerOne): self
+    {
+        $this->aPlayerOne = $aPlayerOne;
+
+        return $this;
+    }
+
+    public function getAPlayerTwo(): ?string
+    {
+        return $this->aPlayerTwo;
+    }
+
+    public function setAPlayerTwo(?string $aPlayerTwo): self
+    {
+        $this->aPlayerTwo = $aPlayerTwo;
+
+        return $this;
+    }
+
+    public function getAPlayerThree(): ?string
+    {
+        return $this->aPlayerThree;
+    }
+
+    public function setAPlayerThree(?string $aPlayerThree): self
+    {
+        $this->aPlayerThree = $aPlayerThree;
+
+        return $this;
+    }
+
+    public function getBPlayerOne(): ?string
+    {
+        return $this->bPlayerOne;
+    }
+
+    public function setBPlayerOne(?string $bPlayerOne): self
+    {
+        $this->bPlayerOne = $bPlayerOne;
+
+        return $this;
+    }
+
+    public function getBPlayerTwo(): ?string
+    {
+        return $this->bPlayerTwo;
+    }
+
+    public function setBPlayerTwo(?string $bPlayerTwo): self
+    {
+        $this->bPlayerTwo = $bPlayerTwo;
+
+        return $this;
+    }
+
+    public function getBPlayerThree(): ?string
+    {
+        return $this->bPlayerThree;
+    }
+
+    public function setBPlayerThree(?string $bPlayerThree): self
+    {
+        $this->bPlayerThree = $bPlayerThree;
 
         return $this;
     }

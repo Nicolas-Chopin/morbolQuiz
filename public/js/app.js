@@ -1,8 +1,6 @@
 let app = {
 
-    aTeamScore: {},
-
-    apiBaseURL: 'http://127.0.0.1:8001/',
+    apiBaseURL: new URL(document.URL).origin+'/',
 
     init: function() {
         console.log('init');
@@ -10,6 +8,7 @@ let app = {
         let url = new URL(document.URL);
         let id = url.pathname.split('/')[2];
         let isSum = url.pathname.split('/')[3];
+
         //--------------------------------------------------------------------
         // Plus, Minus & Reset methods for teams' scores
         //--------------------------------------------------------------------
@@ -88,6 +87,33 @@ let app = {
             .then(document.getElementById("b-score").innerHTML = --bScoreFetched);
           }
         },);
+        // target + event reset teams' score
+        if (isSum == null) {
+          // target + event reset A team's score
+          let resetA = document.getElementById("reset-a-team");
+          resetA.addEventListener("click", function () {
+            let fetchOptions = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+            };
+            fetch(app.apiBaseURL + 'api/session/'+id+'/reseta', fetchOptions)
+            .then(document.getElementById("a-score").innerHTML = 0)
+            .then(aScoreFetched = 0);
+          },);
+          // target + event reset B team's score
+          let resetB = document.getElementById("reset-b-team");
+          resetB.addEventListener("click", function () {
+            let fetchOptions = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+            };
+            fetch(app.apiBaseURL + 'api/session/'+id+'/resetb', fetchOptions)
+            .then(document.getElementById("b-score").innerHTML = 0)
+            .then(bScoreFetched = 0);
+          },);
+        }
         // target + event resolve for answers' visibility at click
         // Same with keybind 1, 2, 3, 4
         let answerTrigger = document.querySelectorAll(".answer-letter");
@@ -134,32 +160,7 @@ let app = {
               element.firstElementChild.classList.remove("text-ivory")
             })
           }
-        });
-        // target + event reset A team's score
-        let resetA = document.getElementById("reset-a-team");
-        resetA.addEventListener("click", function () {
-          let fetchOptions = {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache'
-          };
-          fetch(app.apiBaseURL + 'api/session/'+id+'/reseta', fetchOptions)
-          .then(document.getElementById("a-score").innerHTML = 0)
-          .then(aScoreFetched = 0);
-        },);
-        // target + event reset B team's score
-        let resetB = document.getElementById("reset-b-team");
-        resetB.addEventListener("click", function () {
-          let fetchOptions = {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache'
-          };
-          fetch(app.apiBaseURL + 'api/session/'+id+'/resetb', fetchOptions)
-          .then(document.getElementById("b-score").innerHTML = 0)
-          .then(bScoreFetched = 0);
-        },);
-        
+        });           
     },    
 
     //--------------------------------------------------------------------

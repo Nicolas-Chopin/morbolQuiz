@@ -7,31 +7,48 @@
 
         <div class="col-5 col-lg-4 text-center">
             <div class="border rounded border-danger pb-1">
-                <h2 class="text-danger">{{ session.aTeamName }}</h2>
-        
+                <h2 class="text-danger mb-0">{{ session.aTeamName }}</h2>
+                <div class="row">
+                    <h6 class="col-4 text-danger">
+                        <i class="fas fa-crown text-danger pr-1 crown-size"></i>
+                        {{ session.aPlayerOne }}
+                    </h6>
+                    <h6 class="col-4 text-danger">{{ session.aPlayerTwo }}</h6>
+                    <h6 class="col-4 text-danger">{{ session.aPlayerThree }}</h6>
+                </div>
+
                 {% if session.aTeamImgUrl != null %}
-                <div><img src="{{ session.aTeamImgUrl }}" alt=""></div>
+                <div><img src="{{ session.aTeamImgUrl }}" alt="A team image"></div>
                 {% endif %}
                 
-                <h2 class="text-danger" id="a-score">{{ session.aTeamScore }}</h2>
+                <h2 class="text-danger mb-0" id="a-score">{{ session.aTeamScore }}</h2>
                 <div class="row">
                     <i class="fas fa-minus-circle text-danger col icon-s pointer" id="minus-a-team"></i>
                     <i class="fas fa-plus-circle text-danger col icon-s pointer" id="plus-a-team"></i>
-                </div>
-            </div>      
+                </div>                
+            </div>
+                  
         </div>
 
         <div class="col-2 col-lg-4"></div>
     
         <div class="col-5 col-lg-4 text-center">
             <div class="border rounded border-warning pb-1">
-                <h2 class="text-warning">{{ session.bTeamName }}</h2>
+                <h2 class="text-warning mb-0">{{ session.bTeamName }}</h2>
+                <div class="row">
+                    <h6 class="col-4 text-warning">
+                        <i class="fas fa-crown text-warning pr-1 crown-size"></i>
+                        {{ session.bPlayerOne }}
+                    </h6>
+                    <h6 class="col-4 text-warning">{{ session.bPlayerTwo }}</h6>
+                    <h6 class="col-4 text-warning">{{ session.bPlayerThree }}</h6>
+                </div>
 
                 {% if session.bTeamImgUrl != null %}
-                <div><img src="{{ session.bTeamImgUrl }}" alt=""></div>
+                <div><img src="{{ session.bTeamImgUrl }}" alt="B team imag"></div>
                 {% endif %}
 
-                <h2 class="text-warning" id="b-score">{{ session.bTeamScore }}</h2>
+                <h2 class="text-warning mb-0" id="b-score">{{ session.bTeamScore }}</h2>
                 <div class="row">
                     <i class="fas fa-minus-circle text-warning col icon-s pointer" id="minus-b-team"></i>
                     <i class="fas fa-plus-circle text-warning col icon-s pointer" id="plus-b-team"></i>

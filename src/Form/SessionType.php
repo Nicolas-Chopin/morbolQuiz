@@ -31,10 +31,34 @@ class SessionType extends AbstractType
                 'attr' => ['class' => 'col-12 mb-2 text-danger'],
                 'constraints' => new NotBlank(),
                 ])
+            ->add('aPlayerOne', null, [
+                'label' => "Joueur 1 (chef d'équipe)",
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
+            ->add('aPlayerTwo', null, [
+                'label' => "Joueur 2",
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
+            ->add('aPlayerThree', null, [
+                'label' => "Joueur 3",
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
             ->add('bTeamName', null, [
                 'label' => 'Nom de l\'équipe 2',
                 'attr' => ['class' => 'col-12 mb-2 text-warning'],
                 'constraints' => new NotBlank(),
+                ])
+            ->add('bPlayerOne', null, [
+                'label' => "Joueur 1 (chef d'équipe)",
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
+            ->add('bPlayerTwo', null, [
+                'label' => "Joueur 2",
+                'attr' => ['class' => 'col-12 mb-2'],
+                ])
+            ->add('bPlayerThree', null, [
+                'label' => "Joueur 3",
+                'attr' => ['class' => 'col-12 mb-2'],
                 ])
             ->add('aTeamImgUrl', null, [
                 'label' => 'Image de l\'équipe 1',
