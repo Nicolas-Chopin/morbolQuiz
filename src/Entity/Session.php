@@ -90,7 +90,7 @@ class Session
     private $bTeamImgUrl;
 
     /**
-     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="session")
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="session", cascade={"persist", "remove"})
      */
     private $answers;
 

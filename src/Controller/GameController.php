@@ -247,7 +247,7 @@ class GameController extends AbstractController
     /**
      * @Route("/session/delete/{id<\d+>}", name="session_delete", methods={"GET", "POST"})
      */
-    public function delete(Request $request, Session $session = null)
+    public function delete(Session $session = null)
     {
         //$this->denyAccessUnlessGranted('delete', $session);
         
