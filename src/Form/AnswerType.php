@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class AnswerType extends AbstractType
 {
@@ -27,7 +28,7 @@ class AnswerType extends AbstractType
                 ])
             ->add('isCorrect', ChoiceType::class, [
                 'attr' => ['class' => 'col-12 mb-2'],
-                'constraints' => new NotBlank(),
+                'constraints' => new NotNull(),
                 'label' => 'Cette réponse est correcte',
                 'choices' => [
                     'Oui' => true,
