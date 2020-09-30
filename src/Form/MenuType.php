@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Menu;
+use App\Form\DataTransformer\AccentSkip;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -10,6 +11,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MenuType extends AbstractType
 {
+    private $accentSkip;
+
+    public function __construct(AccentSkip $accentSkip)
+    {
+        $this->accentSkip = $accentSkip;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -23,6 +31,9 @@ class MenuType extends AbstractType
                 'constraints' => new NotBlank(),
                 'label' => 'Position du menu',
                 ]);
+            
+            $builder->get('name')
+                ->addModelTransformer($this->accentSkip);
     }
 
     public function configureOptions(OptionsResolver $resolver)

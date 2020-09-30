@@ -341,7 +341,9 @@ class GameController extends AbstractController
         ['menuOrder' => 'ASC']
         );
 
-        $menuNumber = 1;
+        $menuOneId = $menus[0]->getId();
+        $menuTwoId = $menus[1]->getId();
+        $menuThreeId = $menus[2]->getId();
 
         $menuOne = $menus[0];
         $menuTwo = $menus[1];
@@ -353,14 +355,16 @@ class GameController extends AbstractController
             'menuOne' => $menuOne,
             'menuTwo' => $menuTwo,
             'menuThree' => $menuThree,
-            'menuNumber' => $menuNumber,
+            'menuOneId' => $menuOneId,
+            'menuTwoId' => $menuTwoId,
+            'menuThreeId' => $menuThreeId,
         ]);
     }
 
     /**
-     * @Route("/session/{id<\d+>}/menus/{orderInMenu<\d+>}", name="menu_show")
+     * @Route("/session/{id<\d+>}/menus/{menuId<\d+>}/{orderInMenu<\d+>}", name="menu_show")
      */
-    public function selectedMenu(Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository, $orderInMenu)
+    public function selectedMenu(Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository, MenuRepository $menuRepository, $menuId, $orderInMenu)
     {
         if ($session === null) {
             throw $this->createNotFoundException('Session introuvable.');
@@ -369,10 +373,13 @@ class GameController extends AbstractController
         $category = $categoryRepository->findOneBy([
             'name' => 'Menus',
         ]);
+
+        $currentMenu = $menuRepository->find($menuId);
         
         $question = $questionRepository->findOneBy([
             'session' => $session,
             'category' => $category,
+            'menu' => $currentMenu,
             'orderInMenu' => $orderInMenu,
         ]);
 
@@ -387,6 +394,7 @@ class GameController extends AbstractController
             'session' => $session,
             'category' => $category,
             'answers' => $arrayAnswers,
+            'currentMenu' => $menuId,
             'orderInMenu' => $orderInMenu,
         ]);
     }

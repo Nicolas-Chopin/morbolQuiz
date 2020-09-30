@@ -89,6 +89,18 @@ class SessionType extends AbstractType
             ->addModelTransformer($this->accentSkip);
         $builder->get('sumName')
             ->addModelTransformer($this->accentSkip);
+        $builder->get('aPlayerOne')
+            ->addModelTransformer($this->accentSkip);
+        $builder->get('aPlayerTwo')
+            ->addModelTransformer($this->accentSkip);
+        $builder->get('aPlayerThree')
+            ->addModelTransformer($this->accentSkip);
+        $builder->get('bPlayerOne')
+            ->addModelTransformer($this->accentSkip);
+        $builder->get('bPlayerTwo')
+            ->addModelTransformer($this->accentSkip);
+        $builder->get('bPlayerThree')
+            ->addModelTransformer($this->accentSkip);
     }
 
     public function configureOptions(OptionsResolver $resolver)

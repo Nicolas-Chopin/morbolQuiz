@@ -12,15 +12,15 @@
     <ul class="list-unstyled">
         <li>
             <span class="h1 text-primary font-horse">Menu</span>
-            <a href="{{ path('menu_show', {id: session.id, orderInMenu: menuNumber}) }}" class="h2 text-ivory font-horse">{{ menuOne.name }}</a>
+            <a href="{{ path('menu_show', {id: session.id, menuId: menuOneId, orderInMenu: 1}) }}" class="h2 text-ivory font-horse">{{ menuOne.name }}</a>
         </li>
         <li>
             <span class="h1 text-primary font-horse">Menu</span>
-            <a href="{{ path('menu_show', {id: session.id, orderInMenu: menuNumber}) }}" class="h2 text-ivory font-horse">{{ menuTwo.name }}</a>
+            <a href="{{ path('menu_show', {id: session.id, menuId: menuTwoId, orderInMenu: 1}) }}" class="h2 text-ivory font-horse">{{ menuTwo.name }}</a>
         </li>
         <li>
             <span class="h1 text-primary font-horse">Menu</span>
-            <a href="{{ path('menu_show', {id: session.id, orderInMenu: menuNumber}) }}" class="h2 text-ivory font-horse">{{ menuThree.name }}</a>
+            <a href="{{ path('menu_show', {id: session.id, menuId: menuThreeId, orderInMenu: 1}) }}" class="h2 text-ivory font-horse">{{ menuThree.name }}</a>
         </li>
     </ul>  
 
