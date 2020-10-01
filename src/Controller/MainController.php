@@ -2,8 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Exception;
+use App\Entity\Contact;
+use App\Form\ContactType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
@@ -24,11 +31,56 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact", methods={"GET"})
+     * @Route("/contact", name="contact")
      */
-    public function contact()
+    public function contact(MailerInterface $mailer, Request $request)
     {
-        return $this->render('main/contact.html.twig');
+        $contact = new Contact();
+
+        $form = $this->createForm(ContactType::class, $contact);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // doing form traitment
+            $contact = $form->getData();
+            $firstname = $contact->getFirstname();
+            $lastname = $contact->getLastname();
+            $phone = $contact->getPhone();
+            $email = $contact->getEmail();
+            $message = $contact->getMessage();
+            
+            $email = (new Email())
+            ->from($email)
+            ->to('chopin.nico@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Contact Morbol Quiz')
+            ->html("
+                <div>
+                    <p>Message de $firstname $lastname : </p>
+                    $message
+                </div>
+                <div>
+                    <p>Numéro de téléphone indiqué : $phone</p>
+                </div>
+                <div>
+                    <p>Email indiqué : $email</p>
+                </div>");
+
+            $mailer->send($email);
+            
+
+            $this->addFlash('success', 'Message envoyé');
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('main/contact.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
