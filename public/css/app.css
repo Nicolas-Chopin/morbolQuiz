@@ -34,7 +34,6 @@
 
 html {
     overflow-y: scroll;
-    background: black;
     font-size: 1.5rem;
     height:100%;
 }
@@ -46,8 +45,20 @@ footer {
     height: 2.5rem;
 }
 
-body, ul {
-    background: black;
+body, ul, html, .list-group, .list-group-item, .list-group-flush, .sticky-top-2 {
+    background: rgb(36, 40, 44);
+}
+
+input {
+    background: rgb(70, 70, 70) !important;
+}
+
+.border-header {
+    border-bottom: rgb(100, 100, 100) 2px solid;
+}
+
+.border-footer {
+    border-top: rgb(100, 100, 100) 2px solid;
 }
 
 .pointer {
@@ -75,7 +86,6 @@ h1, h2, .nav-link {
 }
 
 input {
-    background: rgb(70, 70, 70) !important;
     color: ivory !important;
 }
 
@@ -119,10 +129,6 @@ i a:hover {
     text-decoration: none;
 }
 
-.list-group, .list-group-item, .list-group-flush {
-    background: black;
-}
-
 .answer {
     padding: 0em 1em;
     font-size: 0.8em;
@@ -151,7 +157,6 @@ i a:hover {
 
 .sticky-top-2 {
     top: 2.5em;
-    background: black;
     z-index: 3;
 }
 
@@ -178,12 +183,4 @@ i a:hover {
 
 .footer-text {
     font-size: 0.8em;
-}
-
-.border-header {
-    border-bottom: rgb(100, 100, 100) 2px solid;
-}
-
-.border-footer {
-    border-top: rgb(100, 100, 100) 2px solid;
 }

@@ -34,15 +34,12 @@
 
 html {
     overflow-y: scroll;
-    background: black !important;
     font-size: 1.5rem;
 }
 
-body, .content-wrapper, aside, .content-header::before, .content-header::after, .content-header {
-    background: black !important;
+html, body, .content-wrapper, aside, .content-header::before, .content-header::after, .content-header, ul {
+    background: rgb(36, 40, 44) !important;
 }
-
-
 
 .logo {
     font-family: 'Horseshoes', sans-serif;
@@ -51,18 +48,12 @@ body, .content-wrapper, aside, .content-header::before, .content-header::after, 
     font-size: 3em;
 }
 
-ul {
-    background: black;
-    color: ivory;
+ul, i, .title, .datagrid thead a, .datagrid thead span, .form-group label, .content-header, .resizer-handler-left, .btn-secondary {
+    color: ivory !important;
 }
 
 i {
     padding: 0.2em;
-    color: ivory !important;
-}
-
-.title, .datagrid thead a, .datagrid thead span, .form-group label {
-    color: ivory;
 }
 
 th {
@@ -78,7 +69,6 @@ tbody, .list-pagination, .content-panel-body.without-padding, .content-panel-bod
 }
 
 .content-header {
-    color: ivory;
     padding-left: 1em;
     padding-right: 1em;
 }
@@ -87,13 +77,8 @@ tbody, .list-pagination, .content-panel-body.without-padding, .content-panel-bod
     border: grey solid 2px !important;
 }
 
-.resizer-handler-left {
-    color: ivory;
-}
-
 .btn-secondary {
     background: grey;
-    color: ivory;
     border-radius: 5px;
 }    
 
