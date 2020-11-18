@@ -17,24 +17,24 @@ class AnswerType extends AbstractType
     {
         $builder
             ->add('text', null, [
-                'attr' => ['class' => 'col-12 mb-2'],
+                'attr' => ['class' => 'col-12 mb-1'],
                 'constraints' => new NotBlank(),
                 'label' => 'Réponse',
                 ])
-            ->add('answerOrder', IntegerType::class, [
+            /*->add('answerOrder', IntegerType::class, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
                 'label' => 'Numéro/ordre de la réponse',
-                ])
+                ])*/
             ->add('isCorrect', ChoiceType::class, [
-                'attr' => ['class' => 'col-12 mb-2'],
+                'attr' => ['class' => 'col-12 mb-1'],
                 'constraints' => new NotNull(),
-                'label' => 'Cette réponse est correcte',
+                'label' => 'Cette réponse est-elle correcte ?',
                 'choices' => [
                     'Oui' => true,
                     'Non' => false,
                 ],
-                'expanded' => true
+                'expanded' => false
                 ]);
     }
 

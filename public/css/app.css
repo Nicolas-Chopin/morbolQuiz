@@ -53,6 +53,15 @@ input {
     background: rgb(70, 70, 70) !important;
 }
 
+.border-answers-top {
+    border-top: rgb(100, 100, 100) solid 2px;
+}
+
+.form-control {
+    background: rgb(70, 70, 70) !important;
+    color: ivory !important;
+}
+
 .border-header {
     border-bottom: rgb(100, 100, 100) 2px solid;
 }

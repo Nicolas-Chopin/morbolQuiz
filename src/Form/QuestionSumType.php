@@ -14,12 +14,12 @@ class QuestionSumType extends AbstractType
     {
         $builder
             ->add('text', null, [
-                'attr' => ['class' => 'col-12 mb-2'],
+                'attr' => ['class' => 'mb-1'],
                 'constraints' => new NotBlank(),
                 'label' => 'Intitulé de la question',
                 ])
             ->add('orderInSum', null, [
-                'attr' => ['class' => 'col-12 mb-2'],
+                'attr' => ['class' => 'mb-1'],
                 'constraints' => new NotBlank(),
                 'label' => 'Numéro de la question',
                 ]);
