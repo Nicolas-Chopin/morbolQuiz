@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <p>Un mail a été envoyé, contenant un lien permettant de réinitialiser votre mot de passe. Ce lien expirera dans {{ tokenLifetime|date('g') }} heures.</p>
+    <p>Si vous n'avez pas reçu de mail, merci de vérifier vos spams ou <a href="{{ path('app_forgot_password_request') }}">renvoyez le mail à nouveau</a>.</p>
+</div>
+    
+{% endblock %}

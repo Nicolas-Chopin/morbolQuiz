@@ -22,7 +22,11 @@ security:
                 check_path: login
                 #username_parameter: login[_username]
                 #password_parameter: login[_password]
-
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                secure: true
             logout:
                 path:   /logout
                 target: /
