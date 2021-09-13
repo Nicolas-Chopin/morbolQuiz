@@ -1,12 +1,12 @@
 {% extends 'base_game.html.twig' %}
 
-{% block title %}{{ category.name }} : {{ session.name }}{% endblock %}
+{% block title %}{{ category.nameDisplay }} : {{ session.name }}{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid">
 
-    <h1 class="text-center">{{ category.name }} : {{ session.name }}</h2>
+    <h1 class="text-center">{{ category.nameDisplay }} : {{ session.name }}</h2>
 
     {% if question == null %}
         <h3>Aucune question trouvée. Pensez à les créer avant !</h3>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-2">
                 {% if orderInNuggets == 6 %}
-                    <a href="{{ path('sorp', {id: session.id}) }}">Sel ou poivre</a>
+                    <a href="{{ path('sorp', {id: session.id}) }}">{{ categoryNext.nameDisplay }}</a>
                 {% else %}
                     <a href="{{ path('nuggets', {id: session.id, orderInNuggets: orderInNuggets + 1}) }}">Question suivante</a>
                 {% endif %}

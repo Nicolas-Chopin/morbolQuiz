@@ -69,12 +69,12 @@ class SessionType extends AbstractType
                 'attr' => ['class' => 'col-12 mb-2'],
                 ])
             ->add('sorpName', null, [
-                'label' => 'Thème du Sel ou poivre',
+                'label' => 'Thème du Marlboro ou Xylomid',
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
                 ])
             ->add('sumName', null, [
-                'label' => 'Thème de l\'addition',
+                'label' => 'Thème de l\'haleine putride',
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
                 ]);

@@ -15,34 +15,34 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-header mb-1">
                 <a class="navbar-brand p-0 m-0" href="{{ path('index') }}">
-                    <h1 class="text-green p-0 m-0">Morbol Quiz</h1>
+                    <h1 class="text-green p-0 m-0">Morbol <span class="text-danger font-horse">Q</span><span class="text-warning font-horse">u</span><span class="text-danger font-horse">i</span><span class="text-warning font-horse">z</span></h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active font-dimbo" href="{{ path('user_profile') }}">Mon profil</a>                     
-                        <a class="nav-item nav-link active font-dimbo">Bienvenue 
+                        <a class="nav-item nav-link active font-dimbo">
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                 {% if app.user.roles[0] == 'ROLE_ADMIN' %}
-                                    {{ app.user.username }} (Administrateur)
+                                    Bienvenue {{ app.user.username }} (Administrateur)
                                 {% endif %}
                                 {% if app.user.roles[0] == 'ROLE_USER' %}
-                                    {{ app.user.username }}(Membre)
+                                    Bienvenue {{ app.user.username }}
                                 {% endif %}
                                 {% else %}
-                                    visiteur (venu d'ailleurs)                          
+                                                              
                             {% endif %}
-                         !</a>
+                        </a>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="nav-item nav-link active btn btn-danger" href="{{ path('logout') }}">Logout</a>
+                            <a href="{{ path('user_profile') }}" class="nav-item nav-link btn btn-info mr-1 text-ivory" role="button">Mon profil</a>
+                            <a class="nav-item nav-link btn btn-danger text-ivory" href="{{ path('logout') }}">Logout</a>
                         {% else %}
-                            <a href="{{ path('user_register') }}" class="nav-item nav-link active btn btn-info mr-1">Inscription</a>
-                            <a class="nav-item nav-link active btn btn-success" href="{{ path('login') }}">Login</a>
+                            <a href="{{ path('user_register') }}" class="nav-item nav-link btn btn-info mr-1 text-ivory text-ivory">Inscription</a>
+                            <a class="nav-item nav-link btn btn-success text-ivory" href="{{ path('login') }}">Login</a>
                         {% endif %}
                         {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.roles[0] == 'ROLE_ADMIN' %}
-                            <a class="nav-item nav-link active font-dimbo" href="{{ path('admin') }}">Admin BackOffice</a>
+                            <a class="nav-item nav-link btn btn-secondary ml-1 text-ivory" href="{{ path('admin') }}">Admin BackOffice</a>
                         {% endif %}
                     </div>
                 </div>
@@ -59,16 +59,16 @@
             <div class="container-fluid text-md-left border-footer">
                 <div class="row"> 
                     <div class="col-12 col-lg-3 text-center footer-text">
-                        <a href="{{ path('patchnotes') }}">Patch notes</a>
+                        <a href="{{ path('patchnotes') }}" class="text-warning">Patch notes</a>
                     </div>
                     <div class="col-12 col-lg-3 text-center footer-text">
-                        <a href="{{ path('about') }}">&#192; propos</a>
+                        <a href="{{ path('about') }}" class="text-warning">&#192; propos</a>
                     </div>
                     <div class="col-12 col-lg-3 text-center footer-text">
-                        <a href="{{ path('contact') }}">Contact</a>
+                        <a href="{{ path('contact') }}" class="text-warning">Contact</a>
                     </div>
                     <div class="col-12 col-lg-3 text-center footer-text">
-                        <a href="{{ path('legal-mentions') }}">Mentions légales</a>
+                        <a href="{{ path('legal-mentions') }}" class="text-warning">Mentions légales</a>
                     </div>
                 </div>
             </div>

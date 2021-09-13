@@ -36,13 +36,14 @@ class CategoryCrudController extends AbstractCrudController
         $name = TextField::new('name', 'Nom'); 
         $created = DateTimeField::new('createdAt', 'Créé le')->hideOnForm();
         $updated = DateTimeField::new('updatedAt', 'Modifié le')->hideOnForm();
+        $nameDisplay = TextField::new('nameDisplay', 'Nom affiché'); 
 
         if (Crud::PAGE_NEW === $pageName) {
-            return [$name];
+            return [$name, $nameDisplay];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$name];
+            return [$name, $nameDisplay];
         } else {
-            return [$id, $name, $created, $updated];
+            return [$id, $name, $nameDisplay, $created, $updated];
         };
     }
 

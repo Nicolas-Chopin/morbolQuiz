@@ -270,7 +270,7 @@ class GameController extends AbstractController
     }
     
     /**
-     * @Route("/session/{id<\d+>}/nuggets/{orderInNuggets<\d+>}", name="nuggets")
+     * @Route("/session/{id<\d+>}/test-one/{orderInNuggets<\d+>}", name="nuggets")
      */
     public function nuggets(Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository, $orderInNuggets)
     {
@@ -280,6 +280,9 @@ class GameController extends AbstractController
 
         $category = $categoryRepository->findOneBy([
             'name' => 'Nuggets',
+        ]);
+        $categoryNext = $categoryRepository->findOneBy([
+            'name' => 'Sel ou poivre',
         ]);
         
         $question = $questionRepository->findOneBy([
@@ -300,11 +303,12 @@ class GameController extends AbstractController
             'category' => $category,
             'answers' => $arrayAnswers,
             'orderInNuggets' => $orderInNuggets,
+            'categoryNext' => $categoryNext,
         ]);
     }
 
     /**
-     * @Route("/session/{id<\d+>}/sorp", name="sorp")
+     * @Route("/session/{id<\d+>}/test-two", name="sorp")
      */
     public function sorp(Session $session = null, CategoryRepository $categoryRepository)
     {
@@ -315,15 +319,19 @@ class GameController extends AbstractController
         $category = $categoryRepository->findOneBy([
             'name' => 'Sel ou poivre',
         ]);
+        $categoryNext = $categoryRepository->findOneBy([
+            'name' => "Menus",
+        ]);
         
         return $this->render('game/sorp.html.twig', [
             'session' => $session,
             'category' => $category,
+            'categoryNext' => $categoryNext,
         ]);
     }
 
     /**
-     * @Route("/session/{id<\d+>}/menus", name="menus")
+     * @Route("/session/{id<\d+>}/test-three", name="menus")
      */
     public function menus(Session $session = null, CategoryRepository $categoryRepository, MenuRepository $menuRepository)
     {
@@ -333,6 +341,9 @@ class GameController extends AbstractController
 
         $category = $categoryRepository->findOneBy([
             'name' => "Menus",
+        ]);
+        $categoryNext = $categoryRepository->findOneBy([
+            'name' => "L'addition",
         ]);
 
         $menus = $menuRepository->findBy([
@@ -358,11 +369,12 @@ class GameController extends AbstractController
             'menuOneId' => $menuOneId,
             'menuTwoId' => $menuTwoId,
             'menuThreeId' => $menuThreeId,
+            'categoryNext' => $categoryNext,
         ]);
     }
 
     /**
-     * @Route("/session/{id<\d+>}/menus/{menuId<\d+>}/{orderInMenu<\d+>}", name="menu_show")
+     * @Route("/session/{id<\d+>}/test-three/{menuId<\d+>}/{orderInMenu<\d+>}", name="menu_show")
      */
     public function selectedMenu(Session $session = null, CategoryRepository $categoryRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository, MenuRepository $menuRepository, $menuId, $orderInMenu)
     {
@@ -400,7 +412,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/session/{id<\d+>}/sum", name="sum")
+     * @Route("/session/{id<\d+>}/test-four", name="sum")
      */
     public function sum(Session $session = null, CategoryRepository $categoryRepository)
     {
@@ -411,15 +423,19 @@ class GameController extends AbstractController
         $category = $categoryRepository->findOneBy([
             'name' => "L'addition",
         ]);
+        $categoryNext = $categoryRepository->findOneBy([
+            'name' => "Morbol de la Mort",
+        ]);
         
         return $this->render('game/sum.html.twig', [
             'session' => $session,
             'category' => $category,
+            'categoryNext' => $categoryNext,
         ]);
     }
 
     /**
-     * @Route("/session/{id<\d+>}/deathmorbol", name="death_morbol")
+     * @Route("/session/{id<\d+>}/test-final", name="death_morbol")
      */
     public function deathMorbol(Session $session = null, CategoryRepository $categoryRepository)
     {

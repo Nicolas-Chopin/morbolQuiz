@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Règles du jeu{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    
+        <h1 class="text-green">Regles du jeu</h1>
+
+        <p>
+            Le Morbol Quiz est un jeu d'ambiance librement inspiré du jeu Burger Quiz.
+        </p>
+        <p>
+            Deux équipes, de 2 à 3 joueurs chacune, s'affrontent dans un face à face de questions.
+        </p>
+        <p>
+            En plus des 2 équipes de joueurs, un Maître du Jeu (MJ) est nécessaire pour animer la partie.
+        </p>
+        <p>
+            Le MJ est souvent le créateur du quiz. Le créateur du quiz ne peut pas être l'un des joueurs.
+        </p>
+
+        <h2 class="text-green mt-5">But du jeu :</h2>
+        <p>
+            Être le premier à totaliser 25 Bulbes en répondant aux questions afin de tenter l'ultime épreuve : La Morbol de la Mort
+        </p>
+        
+        <h2 class="text-green mt-5">Deroulement du jeu :</h2>
+        <p>
+            Déterminer un chef d'équipe pour chacune des équipes et déterminer quelle équipe prend la main (par exemple : à l'aide d'un mini-jeu de son choix ou épreuve de hasard rapide).
+        </p>
+
+        <h4 class="mt-5">Le jeu se déroule en 2 phases :</h4>
+
+        <h5 class="mt-5">Phase 1 : Récupérer des Bulbes au cours de 4 épreuves</h5>
+        
+        <ol>
+            <li>
+                Les Sarments (1 Bulbe par bonne réponse)
+                <ul>
+                    <li>Question à choix multiples</li>
+                    <li>La première question est posée à l'équipe ayant la main, la seconde à l'autre équipe et ainsi de suite</li>
+                    <li>3 questions par équipe</li>
+                </ul>
+            </li>
+            <li>
+                Marlboro ou Xylomid ? (1 Bulbe par bonne réponse)
+                <ul>
+                    <li>Epreuve de rapidité : vous pouvez utiliser un buzzer externe afin de savoir qui répondra à la question (ex : https://buzzin.live/)</li>
+                    <li>Un thème sous la forme "A ou B" est définit et énoncé par le MJ</li>
+                    <li>La réponse à chaque question est obligatoirement "A" ou "B" (ou les deux si précisé)</li>
+                    <li>En cas de mauvaise réponse, le Bulbe est attribué à l'autre équipe</li>
+                </ul>
+            </li>
+            <li>
+                Les Germes (1 Bulbe par bonne réponse)
+                <ul>
+                    <li>3 thèmes différents dont le troisième est, en général, TRES difficile et avec un titre relativement long</li>
+                    <li>Chaque thème contient une série de 5 questions sur celui-ci</li>
+                    <li>L'équipe ayant la main choisi son germe en premier et devra répondre aux 5 questions</li>
+                    <li>La seconde équipe choisira parmi les deux Germes et devra répondre aux 5 questions de son Germe</li>
+                </ul>
+            </li>
+            <li>
+                L'haleine putride (3 Bulbes par bonne réponse)
+                <ul>
+                    <li>Epreuve de rapidité : vous pouvez utiliser un buzzer externe afin de savoir qui répondra à la question (ex : https://buzzin.live/)</li>
+                    <li>Un thème est définit et énoncé par le MJ</li>
+                    <li>10 questions dont la réponse est en lien avec le thème</li>
+                    <li>En cas de mauvaise réponse, les Bulbes sont attribués à l'autre équipe</li>
+                </ul>
+            </li>
+        </ol>
+
+        <p>
+            La première équipe à totaliser 25 Bulbes est déclarée gagnante et tente le Morbol de la Mort. <br>
+            Si aucune équipe n'a atteint les 25 Bulbes, l'équipe ayant le plus de Bulbes est déclarée gagnante. <br>
+            En cas d'égalité, le MJ devra poser une 11ème question d'haleine putride.
+        </p>
+
+        <h5 class="mt-5">Phase 2 : Le Morbol de la Mort</h5>
+
+        <div class="row">
+
+            <p class="col-8">
+                L'équipe gagnante désigne son candidat pour tenter l'épreuve du Morbol de la Mort. <br>
+                Il s'agit d'une série de 10 questions relativement simples, posées successivement par le MJ. Il est d'usage de laisser un intervalle de temps entre deux questions.<br>
+                Celui-ci sera augmenté après chaque question. <br>
+                Le MJ peut se référer au tableau ci-joint pour se faire une idée mais il est libre de laisser plus ou moins de temps si il le souhaite. <br>
+                
+                Le joueur doit attendre la fin du questionnaire pour y répondre dans l'ordre. Il ne peut ni prendre de notes, ni faire répéter les questions. <br> <br>
+                Si le joueur réussit à donner les 5 premières bonnes réponses dans l’ordre, il gagne le petit Morbol de la Mort. <br>
+                Si le Joueur réussit à donner les 10 bonnes réponses dans l'ordre, il gagne le Grand Morbol de la Mort !    
+            </p>
+
+            <table class="table yable-scripted table-hover table-striped table-dark col-3">
+                <thead>
+                    <tr>
+                        <th scope="col" class="normal-fweight col-4 text-center align-middle p-0">Intervalle entre les questions...</th>
+                        <th scope="col" class="normal-fweight col-4 text-center align-middle p-0">Temps laissé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set time = [2, 4, 6, 8, 10, 12, 14, 17, 20] %}
+                    {% for i in 1..9 %}
+                        <tr>
+                            <td class="col-4 text-center align-middle p-0">{{i}} à {{i+1}}</td>
+                            <td class="col-4 text-center align-middle p-0">{{time[i-1]}}s</td>
+                        </tr>        
+                    {% endfor %}                
+                </tbody>
+            </table>
+        </div>
+    
+</div>
+
+
+
+{% endblock %}

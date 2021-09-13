@@ -1,13 +1,13 @@
 {% extends 'base_game.html.twig' %}
 
-{% block title %}{{ category.name }} : {{ session.name }}{% endblock %}
+{% block title %}{{ category.nameDisplay }} : {{ session.name }}{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid">
 
     <div class="text-center">
-        <h1>{{ category.name }} : {{ session.name }}</h1>
+        <h1>{{ category.nameDisplay }} : {{ session.name }}</h1>
 
         <h2 class="p-5 m-5">{{ session.sumName }}</h2>
     </div>
@@ -19,7 +19,7 @@
         <div class="col text-center">
         </div>
         <div class="col-2">
-            <a href="{{ path('death_morbol', {id: session.id}) }}">Morbol de la Mort</a>
+            <a href="{{ path('death_morbol', {id: session.id}) }}">{{ categoryNext.nameDisplay }}</a>
         </div>
     </div>       
 

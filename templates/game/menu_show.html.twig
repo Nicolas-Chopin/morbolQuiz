@@ -1,12 +1,12 @@
 {% extends 'base_game.html.twig' %}
 
-{% block title %}{{ category.name }} : {{ session.name }}{% endblock %}
+{% block title %}{{ category.nameDisplay }} : {{ session.name }}{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid">
 
-    <h1 class="text-center">{{ category.name }} : {{ session.name }}</h1>
+    <h1 class="text-center">{{ category.nameDisplay }} : {{ session.name }}</h1>
 
     <h3>{{ question.text }}</h3>
     <ul class="alpha">
@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-2">
             {% if orderInMenu == 1 %}
-                <a href="{{ path('menus', {id: session.id}) }}">Retour aux Menus</a>
+                <a href="{{ path('menus', {id: session.id}) }}">Retour aux {{ category.nameDisplay }}</a>
             {% else %}
                 <a href="{{ path('menu_show', {id: session.id, menuId: currentMenu, orderInMenu: orderInMenu - 1}) }}">Question précédente</a>
             {% endif %}
@@ -40,7 +40,7 @@
         </div>
         <div class="col-2">
             {% if orderInMenu == 5 %}
-                <a href="{{ path('menus', {id: session.id}) }}">Retour aux Menus</a>
+                <a href="{{ path('menus', {id: session.id}) }}">Retour aux {{ category.nameDisplay }}</a>
             {% else %}
                 <a href="{{ path('menu_show', {id: session.id, menuId: currentMenu, orderInMenu: orderInMenu + 1}) }}">Question suivante</a>
             {% endif %}

@@ -39,6 +39,11 @@ class Category
      */
     private $questions;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nameDisplay;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -120,5 +125,17 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getNameDisplay(): ?string
+    {
+        return $this->nameDisplay;
+    }
+
+    public function setNameDisplay(?string $nameDisplay): self
+    {
+        $this->nameDisplay = $nameDisplay;
+
+        return $this;
     }
 }

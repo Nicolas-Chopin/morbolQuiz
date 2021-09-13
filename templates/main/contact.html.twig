@@ -5,13 +5,19 @@
 {% block body %}
 
 <div class="container-fluid">
-    <div id="contactForm" class="row justify-content-center">
+    <div id="contactForm" class="row justify-content-center ">
         {{ form_start(form) }}
 
+        <h1 class="text-green text-center">Formulaire de contact</h1>
+
+        <p class="mb-0">Si vous souhaitez :<li>rapporter un bug,</li><li>évoquer des difficultés rencontrées sur le site,</li><li>faire des suggestions,</li><li>avoir des informations sur le site ou son développement,<li>ou pour toutes autres demandes,</li>merci de me contacter via le formulaire suivant.</p>
+        
+
+        <p>Les champs marqués d'un astérisque (*) sont obligatoires afin de pouvoir vous répondre.</p>
         
         <div class="row">
-            <div class="col">{{ form_row(form.firstname) }}</div>
             <div class="col">{{ form_row(form.lastname) }}</div>
+            <div class="col">{{ form_row(form.firstname) }}</div>
         </div>
         <div class="row">
             <div class="col">{{ form_row(form.phone) }}</div>

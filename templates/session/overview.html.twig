@@ -16,23 +16,23 @@
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center {% if app.request.query.get('nuggetsActive') == 'active' %}active{% endif %}" id="nuggets-tab" data-toggle="tab" href="#nuggets" role="tab" aria-controls="nuggets"
-                aria-selected="false">{{ nuggets.name }}</a>
+                aria-selected="false">{{ nuggets.nameDisplay }}</a>
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center {% if app.request.query.get('sorpActive') == 'active' %}active{% endif %}" id="sorp-tab" data-toggle="tab" href="#sorp" role="tab" aria-controls="sorp"
-                aria-selected="false">{{ salt.name }}</a>
+                aria-selected="false">{{ salt.nameDisplay }}</a>
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center {% if app.request.query.get('menusActive') == 'active' %}active{% endif %}" id="menus-tab" data-toggle="tab" href="#menus" role="tab" aria-controls="menus"
-                aria-selected="false">{{ menus.name }}</a>
+                aria-selected="false">{{ menus.nameDisplay }}</a>
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center {% if app.request.query.get('sumActive') == 'active' %}active{% endif %}" id="sum-tab" data-toggle="tab" href="#sum" role="tab" aria-controls="sum"
-                aria-selected="false">{{ sum.name }}</a>
+                aria-selected="false">{{ sum.nameDisplay }}</a>
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center {% if app.request.query.get('deathActive') == 'active' %}active{% endif %}" id="death-tab" data-toggle="tab" href="#death" role="tab" aria-controls="death"
-                aria-selected="false">{{ deathMorbol.name }}</a>
+                aria-selected="false">{{ deathMorbol.nameDisplay }}</a>
         </li>
     </ul>
 
@@ -53,8 +53,8 @@
             <div class="ml-2">Joueur 3 : <span class="text-warning">{{ session.bPlayerThree }}</span></div>
             <div>Image de la première équipe : <span class="text-danger font-horse">{{ session.aTeamImgUrl }}</span></div>
             <div>Image de la seconde équipe : <span class="text-warning font-horse">{{ session.bTeamImgUrl }}</span></div>
-            <div>Thème du Sel ou poivre : <span class="text-danger font-horse">{{ session.sorpName }}</span></div>
-            <div>Thème de l'addition : <span class="text-warning font-horse">{{ session.sumName }}</span></div>
+            <div>Thème du {{ salt.nameDisplay }} : <span class="text-danger font-horse">{{ session.sorpName }}</span></div>
+            <div>Thème de {{ sum.nameDisplay }} : <span class="text-warning font-horse">{{ session.sumName }}</span></div>
             <a href="{{ path('session_edit', {id: session.id}) }}" class="btn text-warning">
                 Modifier les paramètres de la partie <i class="fas fa-edit text-warning"></i>
             </a>
@@ -64,15 +64,15 @@
             </a>
         </div>
 
-        {###################
-        ****** NUGGETS *****
-        ####################}
+        {##############################
+        ****** NUGGETS / TEST ONE *****
+        ###############################}
         <div class="tab-pane fade {% if app.request.query.get('nuggetsActive') == 'active' %}show active{% endif %}" id="nuggets" role="tabpanel" aria-labelledby="nuggets-tab">
             <h3>
-                {{ nuggets.name }} - 6 questions (3 par équipe)
+                {{ nuggets.nameDisplay }} - 6 questions (3 par équipe)
                 <a href="{{ path('nuggets_add', {id: session.id}) }}"
                     class="text-success btn">
-                    Ajouter un nugget <i class="fas fa-plus-circle text-success"></i>
+                    Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">
@@ -150,12 +150,12 @@
             </ul>
         </div>
 
-        {###################
-        ******* SORP *******
-        ####################}
+        {##############################
+        ******* SORP / TEST TWO *******
+        ###############################}
         <div class="tab-pane fade {% if app.request.query.get('sorpActive') == 'active' %}show active{% endif %}" id="sorp" role="tabpanel" aria-labelledby="sorp-tab">
             <h3>
-                {{ salt.name }} : {{ session.sorpName }} - 10 questions
+                {{ salt.nameDisplay }} : {{ session.sorpName }} - 10 questions
                 <a href="{{ path('sorp_add', {id: session.id}) }}"
                     class="text-success btn">
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
@@ -238,22 +238,22 @@
                 {% endfor %}</ul>
         </div>
 
-        {###################
-        ******* MENUS ******
-        ####################}
+        {################################
+        ******* MENUS / TEST THREE ******
+        #################################}
         <div class="tab-pane fade {% if app.request.query.get('menusActive') == 'active' %}show active{% endif %}" id="menus" role="tabpanel" aria-labelledby="menus-tab">
             <h3>
-                {{ menus.name }} - 3 menus
+                {{ menus.nameDisplay }} - 3 thèmes
                 <a href="{{ path('menu_add', {id: session.id}) }}"
                     class="text-success btn">
-                    Ajouter un menu <i class="fas fa-plus-circle text-success"></i>
+                    Ajouter un thème <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
             <ul class="list-group list-group-flush">{% for menusName in menusNames %}
                 <li class="list-group-item question row">
                     <div class="sticky-top sticky-top-2">
                         <span class="col-10 h3">                       
-                            Menu {{ menusName.menuOrder }} : {{ menusName.name }} - 5 questions par menu
+                            Thème {{ menusName.menuOrder }} : {{ menusName.name }} - 5 questions par thème
                         </span>
                         <span class="col-1">
                             <a href="{{ path('menu_edit', {id: session.id, idMenu: menusName.id}) }}"
@@ -268,7 +268,7 @@
                         <span class="col-1">
                             <a href="{{ path('menu_question_add', {id: session.id, idMenu: menusName.id}) }}"
                                 class="text-success btn p-0">
-                                Ajouter une question aux menus <i class="fas fa-plus-circle text-success icon-q"></i>
+                                Ajouter une question à ce thème <i class="fas fa-plus-circle text-success icon-q"></i>
                             </a>
                         </span>
                     </div>
@@ -319,12 +319,12 @@
                 {% endfor %}</ul>
         </div>
 
-        {###################
-        ******** SUM *******
-        ####################}
+        {###############################
+        ******** SUM / TEST FOUR *******
+        ################################}
         <div class="tab-pane fade {% if app.request.query.get('sumActive') == 'active' %}show active{% endif %}" id="sum" role="tabpanel" aria-labelledby="sum-tab">
             <h3>
-                {{ sum.name }} : {{ session.sumName }} - 10 questions
+                {{ sum.nameDisplay }} : {{ session.sumName }} - 10 questions
                 <a href="{{ path('sum_add', {id: session.id}) }}" class="text-success btn">
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
@@ -395,9 +395,9 @@
                 {% endfor %}</ul>
         </div>
 
-        {###################
-        **** DEATH QUIZ ****
-        ####################}
+        {###############################
+        **** DEATH QUIZ / TEST FIVE ****
+        ################################}
         <div class="tab-pane fade {% if app.request.query.get('deathActive') == 'active' %}show active{% endif %}" id="death" role="tabpanel" aria-labelledby="death-tab">
             <h3>
                 {{ deathMorbol.name }} - 10 questions
