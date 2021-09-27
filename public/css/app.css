@@ -223,3 +223,11 @@ i a:hover {
 .alternate-colors span:nth-of-type(odd){
     color:#dc3545 !important;
 }
+
+.nopoint-li {
+    list-style-type: none;
+}
+
+.arrow-li {
+    list-style-type: '- ';
+}
