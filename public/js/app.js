@@ -3,7 +3,7 @@ let app = {
     apiBaseURL: new URL(document.URL).origin+'/',
 
     init: function() {
-        console.log('init');
+        //console.log('init');
 
         let url = new URL(document.URL);
         let id = url.pathname.split('/')[2];
@@ -23,7 +23,7 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          if (isSum == 'sum') {
+          if (isSum == 'test-four') {
             fetch(app.apiBaseURL + 'api/session/'+id+'/plusthreea', fetchOptions)
             .then(document.getElementById("a-score").innerHTML = (parseInt(aScoreFetched) + 3))
             .then(aScoreFetched = document.getElementById("a-score").innerHTML);
@@ -41,7 +41,7 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          if (isSum == 'sum') {
+          if (isSum == 'test-four') {
             fetch(app.apiBaseURL + 'api/session/'+id+'/plusthreeb', fetchOptions)
             .then(document.getElementById("b-score").innerHTML = (parseInt(bScoreFetched) + 3))
             .then(bScoreFetched = document.getElementById("b-score").innerHTML);
@@ -59,7 +59,7 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          if (isSum == 'sum') {
+          if (isSum == 'test-four') {
             fetch(app.apiBaseURL + 'api/session/'+id+'/minusthreea', fetchOptions)
             .then(document.getElementById("a-score").innerHTML = (parseInt(aScoreFetched) - 3))
             .then(aScoreFetched = document.getElementById("a-score").innerHTML);
@@ -77,7 +77,7 @@ let app = {
           mode: 'cors',
           cache: 'no-cache'
           };
-          if (isSum == 'sum') {
+          if (isSum == 'test-four') {
             fetch(app.apiBaseURL + 'api/session/'+id+'/minusthreeb', fetchOptions)
             .then(document.getElementById("b-score").innerHTML = (parseInt(bScoreFetched) - 3))
             .then(bScoreFetched = document.getElementById("b-score").innerHTML);
