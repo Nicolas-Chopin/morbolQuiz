@@ -98,4 +98,12 @@ class MainController extends AbstractController
     {
         return $this->render('main/patchnotes.html.twig');
     }
+
+    /**
+     * @Route("/rules", name="rules", methods={"GET"})
+     */
+    public function rules()
+    {
+        return $this->render('main/rules.html.twig');
+    }
 }

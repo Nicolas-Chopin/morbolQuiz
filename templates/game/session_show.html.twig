@@ -19,19 +19,19 @@
     <h1 class="text-center text-green">Partie : {{ session.name }}</h1>
     <div class="row justify-content-center">
         <h2 class="col-12 text-center m-2">
-            <a class="font-horse text-ivory" href="{{ path('nuggets', {id: session.id, orderInNuggets: questionNumber}) }}">{{ nuggets.name }}</a>
+            <a class="font-horse text-danger" href="{{ path('nuggets', {id: session.id, orderInNuggets: questionNumber}) }}">{{ nuggets.nameDisplay }}</a>
         </h2>
         <h2 class="col-12 text-center m-2">
-            <a class="font-horse text-ivory" href="{{ path('sorp', {id: session.id}) }}">{{ salt.name }}</a>
+            <a class="font-horse text-warning" href="{{ path('sorp', {id: session.id}) }}">{{ salt.nameDisplay }}</a>
         </h2>
         <h2 class="col-12 text-center m-2">
-            <a class="font-horse text-ivory" href="{{ path('menus', {id: session.id}) }}">{{ menus.name }}</a>
+            <a class="font-horse text-danger" href="{{ path('menus', {id: session.id}) }}">{{ menus.nameDisplay }}</a>
         </h2>
         <h2 class="col-12 text-center m-2">
-            <a class="font-horse text-ivory" href="{{ path('sum', {id: session.id}) }}">{{ sum.name }}</a>
+            <a class="font-horse text-warning" href="{{ path('sum', {id: session.id}) }}">{{ sum.nameDisplay }}</a>
         </h2>
         <h2 class="col-12 text-center m-2">
-            <a class="font-horse text-ivory" href="{{ path('death_morbol', {id: session.id}) }}">{{ deathMorbol.name }}</a>
+            <a class="font-horse text-danger" href="{{ path('death_morbol', {id: session.id}) }}">{{ deathMorbol.nameDisplay }}</a>
         </h2>
     </div>
 

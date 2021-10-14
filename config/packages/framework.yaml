@@ -1,4 +1,7 @@
 framework:
+    #https://github.com/symfony/symfony/issues/37256
+    # secret: 'toto'
+    secret: '%env(APP_SECRET)%'
     csrf_protection: true
     #http_method_override: true
 

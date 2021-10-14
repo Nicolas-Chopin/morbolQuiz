@@ -24,12 +24,12 @@ class MenuType extends AbstractType
             ->add('name', null, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
-                'label' => 'Nom du menu',
+                'label' => 'Nom du germe',
                 ])
             ->add('menuOrder', null, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
-                'label' => 'Position du menu',
+                'label' => 'Position du germe',
                 ]);
             
             $builder->get('name')

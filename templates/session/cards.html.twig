@@ -9,26 +9,26 @@
     <ul class="nav nav-tabs container-fluid sticky-top" id="myTab" role="tablist">
         <li class="nav-item " role="presentation">
             <a class="nav-link active text-center" id="sorp-tab" data-toggle="tab" href="#sorp" role="tab" aria-controls="sorp"
-                aria-selected="false">{{ salt.name }}</a>
+                aria-selected="false">{{ salt.nameDisplay }}</a>
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center" id="sum-tab" data-toggle="tab" href="#sum" role="tab" aria-controls="sum"
-                aria-selected="false">{{ sum.name }}</a>
+                aria-selected="false">{{ sum.nameDisplay }}</a>
         </li>
         <li class="nav-item " role="presentation">
             <a class="nav-link text-center" id="death-tab" data-toggle="tab" href="#death" role="tab" aria-controls="death"
-                aria-selected="false">{{ deathMorbol.name }}</a>
+                aria-selected="false">{{ deathMorbol.nameDisplay }}</a>
         </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
 
-        {###################
-        ******* SORP *******
-        ####################}
+        {##############################
+        ******* SORP / TEST TWO *******
+        ###############################}
         <div class="tab-pane fade show active" id="sorp" role="tabpanel" aria-labelledby="sorp-tab">
             <h3>
-                {{ salt.name }} : {{ session.sorpName }} - 10 questions
+                {{ salt.nameDisplay }} : {{ session.sorpName }} - 10 questions
             </h3>
             <ul class="list-group list-group-flush">{% for sorpQuestion in sorpQuestions %}
                 <li class="question list-group-item row">
@@ -53,12 +53,12 @@
                 {% endfor %}</ul>
         </div>
 
-        {###################
-        ******** SUM *******
-        ####################}
+        {###############################
+        ******** SUM / TEST FOUR *******
+        ################################}
         <div class="tab-pane fade" id="sum" role="tabpanel" aria-labelledby="sum-tab">
             <h3>
-                {{ sum.name }} : {{ session.sumName }} - 10 questions
+                {{ sum.nameDisplay }} : {{ session.sumName }} - 10 questions
             </h3>
             <ul class="list-group list-group-flush">{% for sumQuestion in sumQuestions %}
                 <li class="list-group-item question row">
@@ -85,12 +85,12 @@
                 {% endfor %}</ul>
         </div>
 
-        {###################
-        **** DEATH QUIZ ****
-        ####################}
+        {###############################
+        **** DEATH QUIZ / TEST FIVE ****
+        ################################}
         <div class="tab-pane fade" id="death" role="tabpanel" aria-labelledby="death-tab">
             <h3>
-                {{ deathMorbol.name }} - 10 questions
+                {{ deathMorbol.nameDisplay }} - 10 questions
             </h3>
             <ul class="list-group list-group-flush">{% for deathQuestion in deathQuestions %}
                 <li class="list-group-item question row">

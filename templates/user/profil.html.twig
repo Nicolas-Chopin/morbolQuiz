@@ -6,50 +6,55 @@
 <div class="container-fluid">
     <div class="row inline-block">
 
-        <div class="col-lg-6">
-            <h1>Mon profil</h1>
-            <dl class="row">
-                <dt class="col-4">Nom d'utilisateur</dt>
-                <dd class="col-8">{{ user.username }}</dd>
-                <dt class="col-4">Adresse e-mail</dt>
-                <dd class="col-8">{{ user.email }}</dd>
-                <dt class="col-4">Prénom</dt>
-                <dd class="col-8">{{ user.firstname }}</dd>
-                <dt class="col-4">Nom</dt>
-                <dd class="col-8">{{ user.lastname }}</dd>
-                <dt class="col-12"><a href="{{ path('user_edit') }}">Modifier mon profil</a></dt>
-                <dt class="col-12"><a href="{{ path('user_edit_password') }}">Modifier mon mot de passe</a></dt>
-                <dt class="col-12"><a href="{{ path('user_delete') }}" class="text-danger">Supprimer mon profil</a></dt>
-            </dl>
-        </div>
-
-        <div class="col-lg-6">
-            <h2>Mes parties</h2>
+        <div class="col-12">
+            <h1 class="text-green">Mon profil</h1>
+            <h2 class="alternate-colors">
+                <span>M</span><span>e</span><span>s </span><span>P</span><span>a</span><span>r</span><span>t</span><span>i</span><span>e</span><span>s</span>
+            </h2>
             <a href="{{ path('session_add') }}" class="text-success text-decoration-none btn">
                 Créer une nouvelle partie <i class="fas fa-plus-circle text-success"></i>
             </a>
             <table class="table yable-scripted table-hover table-striped table-dark">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nom de la partie</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col-1"></th>
+                    <th scope="col" class="normal-fweight">Nom de la partie</th>
+                    <th scope="col" class="normal-fweight">Affichage côté joueurs</th>
+                    <th scope="col" class="normal-fweight">Affichage côté Maître du Jeu</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                    {% for session in sessions %}
-                        <tr>
-                            <th scope="row">{{ loop.index}}</th>
-                            <td>{{ session.name }}</td>
-                            <td><a href="{{ path('session_show', {id: session.id}) }}">Jouer cette partie</a></td>
-                            <td><a href="{{ path('session_cards', {id: session.id}) }}">Fiches de présentation</a></td>
-                            <td><a href="{{ path('session_overview', {id: session.id}) }}">Gérer cette partie</a></td>
-                        </tr>
+                {% for session in sessions %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td class="align-middle">{{ session.name }}</td>
+                        <td><a href="{{ path('session_show', {id: session.id}) }}" class="btn btn-green">Lancer la partie</a></td>
+                        <td><a href="{{ path('session_cards', {id: session.id}) }}" class="btn btn-green">Fiches de présentation</a></td>
+                        <td><a href="{{ path('session_overview', {id: session.id}) }}" class="text-warning align-middle">Editer cette partie</a></td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
+
+        <div class="col-lg-6 mt-5">
+            <h2 class="alternate-colors">
+                <span>M</span><span>e</span><span>s </span><span>I</span><span>n</span><span>f</span><span>o</span><span>r</span><span>m</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span><span>s</span>
+            </h2>
+            <dl class="row">
+                <dt class="col-4 normal-fweight">Nom d'utilisateur</dt>
+                <dd class="col-8">{{ user.username }}</dd>
+                <dt class="col-4 normal-fweight">Adresse e-mail</dt>
+                <dd class="col-8">{{ user.email }}</dd>
+                <dt class="col-4 normal-fweight">Prénom</dt>
+                <dd class="col-8">{{ user.firstname }}</dd>
+                <dt class="col-4 normal-fweight">Nom</dt>
+                <dd class="col-8">{{ user.lastname }}</dd>
+                <dt class="col-12 normal-fweight"><a href="{{ path('user_edit') }}" class="text-warning">Modifier mon profil</a></dt>
+                <dt class="col-12 normal-fweight"><a href="{{ path('user_edit_password') }}" class="text-warning">Modifier mon mot de passe</a></dt>
+                <dt class="col-12 normal-fweight"><a href="{{ path('user_delete') }}" class="text-danger">Supprimer mon profil</a></dt>
+            </dl>
         </div>
 
     </div>

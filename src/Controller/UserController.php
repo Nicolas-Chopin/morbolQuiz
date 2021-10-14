@@ -63,7 +63,8 @@ class UserController extends AbstractController
         $user = $this->getUser();
         
         $userSessions = $sessionRepository->findBy(
-            ['user' => $user]
+            ['user' => $user],
+            ['createdAt' => 'DESC']
         );
 
         return $this->render('user/profil.html.twig', [

@@ -98,8 +98,13 @@ input {
     color: ivory !important;
 }
 
-.font-horse {
+.font-horse, .font-horseshoes, h2 span{
     font-family: 'Horseshoes', sans-serif;
+}
+
+.font-horse:hover {
+    text-decoration: none;
+    color: green;
 }
 
 .font-dimbo {
@@ -110,13 +115,27 @@ input {
     color: ivory !important;
 }
 
-.font-horse:hover {
-    text-decoration: none;
+.text-green {
     color: green;
 }
 
-.text-green {
-    color: green;
+.btn-green {
+    color: ivory;
+    background-color: green;
+    border-color: green;
+}
+
+.btn-green:hover {
+    color: ivory;
+    background-color: rgba(0, 128, 0, 0.7);
+    border-color: rgb(2, 110, 2);
+}
+
+.btn-green:focus {
+    color: ivory;
+    background-color: rgba(0, 128, 0, 0.7);
+    border-color: rgb(2, 110, 2);
+    box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25);
 }
 
 .nav-item a:hover {
@@ -192,4 +211,31 @@ i a:hover {
 
 .footer-text {
     font-size: 0.8em;
+}
+
+.normal-fweight {
+    font-weight: 400 !important;
+}
+
+.alternate-colors span:nth-of-type(even){
+    color:#ffc107!important;
+}
+.alternate-colors span:nth-of-type(odd){
+    color:#dc3545 !important;
+}
+
+.nopoint-li {
+    list-style-type: none;
+}
+
+.arrow-li {
+    list-style-type: '- ';
+}
+
+.fontsize-tab {
+    font-size: 2rem;
+}
+
+.contact-list {
+    list-style-type: none;
 }

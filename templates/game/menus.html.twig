@@ -1,25 +1,25 @@
 {% extends 'base_game.html.twig' %}
 
-{% block title %}{{ category.name }} : {{ session.name }}{% endblock %}
+{% block title %}{{ category.nameDisplay }} : {{ session.name }}{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid">
     <div class="text-center">
-        <h1>Les {{ category.name }} : {{ session.name }}</h2>
+        <h1 class="text-danger">Les {{ category.nameDisplay }} : {{ session.name }}</h2>
     </div>
 
     <ul class="list-unstyled">
         <li>
-            <span class="h1 text-primary font-horse">Menu</span>
+            <span class="h1 text-primary font-horse">{{ category.nameDisplay }}</span>
             <a href="{{ path('menu_show', {id: session.id, menuId: menuOneId, orderInMenu: 1}) }}" class="h2 text-ivory font-horse">{{ menuOne.name }}</a>
         </li>
         <li>
-            <span class="h1 text-primary font-horse">Menu</span>
+            <span class="h1 text-primary font-horse">{{ category.nameDisplay }}</span>
             <a href="{{ path('menu_show', {id: session.id, menuId: menuTwoId, orderInMenu: 1}) }}" class="h2 text-ivory font-horse">{{ menuTwo.name }}</a>
         </li>
         <li>
-            <span class="h1 text-primary font-horse">Menu</span>
+            <span class="h1 text-primary font-horse">{{ category.nameDisplay }}</span>
             <a href="{{ path('menu_show', {id: session.id, menuId: menuThreeId, orderInMenu: 1}) }}" class="h2 text-ivory font-horse">{{ menuThree.name }}</a>
         </li>
     </ul>  
@@ -31,7 +31,7 @@
         <div class="col text-center">
         </div>
         <div class="col-2">
-            <a href="{{ path('sum', {id: session.id}) }}">Passer à l'addition</a>
+            <a href="{{ path('sum', {id: session.id}) }}">{{ categoryNext.nameDisplay }}</a>
         </div>
     </div> 
 

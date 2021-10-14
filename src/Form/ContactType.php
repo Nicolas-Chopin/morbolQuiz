@@ -17,26 +17,26 @@ class ContactType extends AbstractType
             ->add('firstname', null, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
-                'label' => 'Prénom',
+                'label' => 'Prénom*',
                 ])
             ->add('lastname', null, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
-                'label' => 'Nom',
+                'label' => 'Nom*',
                 ])
             ->add('phone', null, [
                 'attr' => ['class' => 'col-12 mb-2'],
-                'label' => 'Téléphone',
+                'label' => 'Téléphone (optionnel)',
                 ])
             ->add('email', null, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
-                'label' => 'Mail',
+                'label' => 'Mail*',
                 ])
             ->add('message', TextareaType::class, [
                 'attr' => ['class' => 'col-12 mb-2'],
                 'constraints' => new NotBlank(),
-                'label' => 'Message',
+                'label' => 'Message*',
                 ])
         ;
     }

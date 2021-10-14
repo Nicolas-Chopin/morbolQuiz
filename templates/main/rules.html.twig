@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Règles du jeu{% endblock %}
+
+{% block body %}
+
+{###################
+****** NAVBAR ******
+####################}
+<ul class="nav nav-tabs container-fluid sticky-top justify-content-space-around" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="fontsize-tab nav-link text-center {% if app.request.query is empty %}active{% endif %}" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Regles du jeu</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="fontsize-tab nav-link text-center {% if app.request.query.get('mjActive') == 'active' %}active{% endif %}" id="mj-tab" data-toggle="tab" href="#mj" role="tab" aria-controls="mj" aria-selected="false">Creer et presenter</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+
+    {################
+    ***** RULES *****
+    #################}
+    <div class="ml-3 tab-pane fade {% if app.request.query is empty %}show active{% endif %}" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <h1 class="mt-3 text-green">Regles du jeu</h1>
+        <p>
+            Le Morbol Quiz est un jeu d'ambiance librement inspiré du jeu Burger Quiz.
+        </p>
+        <p>
+            Deux équipes, de 2 à 3 joueurs chacune, s'affrontent dans un face à face de questions.
+        </p>
+        <p>
+            En plus des 2 équipes de joueurs, un Maître du Jeu (MJ) est nécessaire pour animer la partie.
+        </p>
+        <p>
+            Le MJ est souvent le créateur du quiz. Le créateur du quiz ne peut pas être l'un des joueurs.
+        </p>
+
+        <h2 class="text-green mt-5">But du jeu :</h2>
+        <p>
+            Être le premier à totaliser 25 Bulbes en répondant aux questions afin de tenter l'ultime épreuve : Le Morbol de la Mort
+        </p>
+        
+        <h2 class="text-green mt-5">Deroulement du jeu :</h2>
+        <p>
+            Déterminer un chef d'équipe pour chacune des équipes et déterminer quelle équipe prend la main (par exemple : à l'aide d'un mini-jeu de son choix ou épreuve de hasard rapide).
+        </p>
+
+        <h4 class="mt-5">Le jeu se déroule en 2 phases :</h4>
+
+        <h5 class="mt-5"><span class="h3 font-horse text-danger">Phase 1</span> : Récupérer des Bulbes au cours de 4 épreuves</h5>
+        
+        <ul>
+            <li class="nopoint-li mb-2">
+                <span class="h4 font-horse text-warning">Epreuve 1 : Les Sarments</span> (1 Bulbe par bonne réponse)
+                <ul>
+                    <li class="arrow-li">Question à choix multiples</li>
+                    <li class="arrow-li">La première question est posée à l'équipe ayant la main, la seconde à l'autre équipe et ainsi de suite</li>
+                    <li class="arrow-li">3 questions par équipe</li>
+                </ul>
+            </li>
+            <li class="nopoint-li mb-2">
+                <span class="h4 font-horse text-warning">Epreuve 2 : Marlboro ou Xylomid ?</span> (1 Bulbe par bonne réponse)
+                <ul>
+                    <li class="arrow-li">Epreuve de rapidité : vous pouvez utiliser un buzzer externe afin de savoir qui répondra à la question (ex : https://buzzin.live/)</li>
+                    <li class="arrow-li">Un thème sous la forme "A ou B" est définit et énoncé par le MJ</li>
+                    <li class="arrow-li">La réponse à chaque question est obligatoirement "A" ou "B" (ou les deux si précisé)</li>
+                    <li class="arrow-li">En cas de mauvaise réponse, le Bulbe est attribué à l'autre équipe</li>
+                </ul>
+            </li>
+            <li class="nopoint-li mb-2">
+                <span class="h4 font-horse text-warning">Epreuve 3 : Les Germes</span> (1 Bulbe par bonne réponse)
+                <ul>
+                    <li class="arrow-li">3 thèmes différents dont le troisième est, en général, TRES difficile et avec un titre relativement long</li>
+                    <li class="arrow-li">Chaque thème contient une série de 5 questions sur celui-ci</li>
+                    <li class="arrow-li">L'équipe ayant la main choisi son germe en premier et devra répondre aux 5 questions</li>
+                    <li class="arrow-li">La seconde équipe choisira parmi les deux Germes et devra répondre aux 5 questions de son Germe</li>
+                </ul>
+            </li>
+            <li class="nopoint-li mb-2">
+                <span class="h4 font-horse text-warning">Epreuve 4 : L'haleine putride</span> (3 Bulbes par bonne réponse)
+                <ul>
+                    <li class="arrow-li">Epreuve de rapidité : vous pouvez utiliser un buzzer externe afin de savoir qui répondra à la question (ex : https://buzzin.live/)</li>
+                    <li class="arrow-li">Un thème est définit et énoncé par le MJ</li>
+                    <li class="arrow-li">10 questions dont la réponse est en lien avec le thème</li>
+                    <li class="arrow-li">En cas de mauvaise réponse, les Bulbes sont attribués à l'autre équipe</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>
+            La première équipe à totaliser 25 Bulbes est déclarée gagnante et tente le Morbol de la Mort. <br>
+            Si aucune équipe n'a atteint les 25 Bulbes, l'équipe ayant le plus de Bulbes est déclarée gagnante. <br>
+            En cas d'égalité, le MJ devra poser une 11ème question d'haleine putride.
+        </p>
+
+        <h5 class="mt-5"><span class="h3 font-horse text-danger">Phase 2 : </span><span class="h3 font-horse text-warning">Le Morbol de la Mort</span></h5>
+
+        <div class="row">
+
+            <p class="col-8">
+                L'équipe gagnante désigne son candidat pour tenter l'épreuve du Morbol de la Mort. <br>
+                Il s'agit d'une série de 10 questions relativement simples, posées successivement par le MJ. Il est d'usage de laisser un intervalle de temps entre deux questions.<br>
+                Celui-ci sera augmenté après chaque question. <br>
+                Le MJ peut se référer au tableau ci-joint pour se faire une idée mais il est libre de laisser plus ou moins de temps si il le souhaite. <br>
+                
+                Le joueur doit attendre la fin du questionnaire pour y répondre dans l'ordre. Il ne peut ni prendre de notes, ni faire répéter les questions. <br> <br>
+                Si le joueur réussit à donner les 5 premières bonnes réponses dans l’ordre, il gagne le petit Morbol de la Mort. <br>
+                Si le Joueur réussit à donner les 10 bonnes réponses dans l'ordre, il gagne le Grand Morbol de la Mort !    
+            </p>
+
+            <table class="table yable-scripted table-hover table-striped table-dark col-3">
+                <thead>
+                    <tr>
+                        <th scope="col" class="normal-fweight col-4 text-center align-middle p-0">Intervalle entre les questions...</th>
+                        <th scope="col" class="normal-fweight col-4 text-center align-middle p-0">Temps laissé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set time = [2, 4, 6, 8, 10, 12, 14, 17, 20] %}
+                    {% for i in 1..9 %}
+                        <tr>
+                            <td class="col-4 text-center align-middle p-0">{{i}} à {{i+1}}</td>
+                            <td class="col-4 text-center align-middle p-0">{{time[i-1]}}s</td>
+                        </tr>        
+                    {% endfor %}                
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {################
+    ***** USAGE *****
+    #################}
+    <div class="ml-3 tab-pane fade {% if app.request.query.get('mjActive') == 'active' %}show active{% endif %}" id="mj" role="tabpanel" aria-labelledby="mj-tab">           
+        <p class="mt-4">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                Tout se passe sur la page de votre <a href="{{ path('user_profile') }}" class="text-warning">profil</a>.
+            {% else %}
+                Tout se passe sur la page de votre profil, donc une <a href="{{ path('user_register') }}" class="text-warning">inscription</a> est nécessaire. C'est gratuit et votre email n'est utilisé qu'en cas de perte de mot de passe.
+            {% endif %}           
+        </p>
+
+        <h2 class="text-green mt-5">Creation</h2>
+        <p>
+            Vous pouvez ainsi y créer et configurer la partie en tant que Maître du Jeu (MJ).
+        </p>
+        <p>
+            Une fois la partie créée, vous pouvez la changer des options, ajouter, modifier ou supprimer questions et réponses via l'éditeur de partie.
+        </p>
+
+        <h2 class="text-green mt-5">Presentation</h2>
+        <p>
+            Vous trouverez sur votre <a href="{{ path('user_profile') }}" class="text-warning">profil</a> deux boutons :
+        </p>
+        <ol>
+            <li class="nopoint-li mb-4">
+                <span class="btn btn-green">Lancer la partie</span> 
+                <p class="mb-0">
+                    Permet d'afficher l'écran à partager avec les joueurs (par exemple avec un partage d'écran).
+                </p>
+                -> Pour afficher les réponses proposées aux questions affichées lors des épreuves :
+                <ol>
+                    <li class="nopoint-li">Clavier : les touches <span class="text-info">1</span>, <span class="text-info">2</span>, <span class="text-info">3</span> et <span class="text-info">4</span> du pavé numérique</li>
+                    <li class="nopoint-li">et/ou</li>
+                    <li class="nopoint-li">Souris : cliquer sur la lettre <span class="text-green">A</span>, <span class="text-green">B</span>, <span class="text-green">C</span> et <span class="text-green">D</span> de la réponse correspondante</li>
+                </ol>
+                -> Pour afficher la ou les bonnes réponses d'une question :
+                <ol>
+                    <li class="nopoint-li">Clavier : la touche <span class="text-info">Entrée</span></li>
+                    <li class="nopoint-li">et/ou</li>
+                    <li class="nopoint-li">Souris : cliquer sur <span class="text-green">Solution</span> en bas de l'écran</li>
+                </ol>
+                <p class="mt-2 mb-0">
+                    Pour attribuer les points suite à une réponse, les boutons <i class="fas fa-minus-circle"></i> et <i class="fas fa-plus-circle"></i> permettent d'ajuster le score dès que besoin afin d'avoir davantage de libertés si vous souhaitez modifier un peu les règles.
+                </p>
+                <p class="mt-0">
+                    N.B. : les Bulbes sont distribués ou retirés par lot de 3 lors de l'épreuve de l'Haleine putride.
+                </p>
+            </li>
+            <li class="nopoint-li">
+                <span class="btn btn-green">Fiches de présentation</span>
+                <p>
+                    Permet au MJ de visualiser sur une autre page (cachée des joueurs) les questions et réponses des épreuves n'ayant pas d'affichage côté joueur.
+                </p>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+{% endblock %}
