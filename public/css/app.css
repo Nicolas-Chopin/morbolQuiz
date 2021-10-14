@@ -231,3 +231,11 @@ i a:hover {
 .arrow-li {
     list-style-type: '- ';
 }
+
+.fontsize-tab {
+    font-size: 2rem;
+}
+
+.contact-list {
+    list-style-type: none;
+}

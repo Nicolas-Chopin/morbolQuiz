@@ -22,18 +22,6 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active font-dimbo">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                {% if app.user.roles[0] == 'ROLE_ADMIN' %}
-                                    Bienvenue {{ app.user.username }} (Administrateur)
-                                {% endif %}
-                                {% if app.user.roles[0] == 'ROLE_USER' %}
-                                    Bienvenue {{ app.user.username }}
-                                {% endif %}
-                                {% else %}
-                                                              
-                            {% endif %}
-                        </a>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <a href="{{ path('user_profile') }}" class="nav-item nav-link btn btn-info mr-1 text-ivory" role="button">Mon profil</a>
                             <a class="nav-item nav-link btn btn-danger text-ivory" href="{{ path('logout') }}">Logout</a>

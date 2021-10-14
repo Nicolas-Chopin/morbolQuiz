@@ -4,10 +4,25 @@
 
 {% block body %}
 
-<div class="container-fluid">
-    
-        <h1 class="text-green mt-3">Regles du jeu</h1>
+{###################
+****** NAVBAR ******
+####################}
+<ul class="nav nav-tabs container-fluid sticky-top justify-content-space-around" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="fontsize-tab nav-link text-center {% if app.request.query is empty %}active{% endif %}" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Regles du jeu</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="fontsize-tab nav-link text-center {% if app.request.query.get('mjActive') == 'active' %}active{% endif %}" id="mj-tab" data-toggle="tab" href="#mj" role="tab" aria-controls="mj" aria-selected="false">Creer et presenter</a>
+    </li>
+</ul>
 
+<div class="tab-content" id="myTabContent">
+
+    {################
+    ***** RULES *****
+    #################}
+    <div class="ml-3 tab-pane fade {% if app.request.query is empty %}show active{% endif %}" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <h1 class="mt-3 text-green">Regles du jeu</h1>
         <p>
             Le Morbol Quiz est un jeu d'ambiance librement inspiré du jeu Burger Quiz.
         </p>
@@ -112,9 +127,66 @@
                 </tbody>
             </table>
         </div>
-    
+    </div>
+
+    {################
+    ***** USAGE *****
+    #################}
+    <div class="ml-3 tab-pane fade {% if app.request.query.get('mjActive') == 'active' %}show active{% endif %}" id="mj" role="tabpanel" aria-labelledby="mj-tab">           
+        <p class="mt-4">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                Tout se passe sur la page de votre <a href="{{ path('user_profile') }}" class="text-warning">profil</a>.
+            {% else %}
+                Tout se passe sur la page de votre profil, donc une <a href="{{ path('user_register') }}" class="text-warning">inscription</a> est nécessaire. C'est gratuit et votre email n'est utilisé qu'en cas de perte de mot de passe.
+            {% endif %}           
+        </p>
+
+        <h2 class="text-green mt-5">Creation</h2>
+        <p>
+            Vous pouvez ainsi y créer et configurer la partie en tant que Maître du Jeu (MJ).
+        </p>
+        <p>
+            Une fois la partie créée, vous pouvez la changer des options, ajouter, modifier ou supprimer questions et réponses via l'éditeur de partie.
+        </p>
+
+        <h2 class="text-green mt-5">Presentation</h2>
+        <p>
+            Vous trouverez sur votre <a href="{{ path('user_profile') }}" class="text-warning">profil</a> deux boutons :
+        </p>
+        <ol>
+            <li class="nopoint-li mb-4">
+                <span class="btn btn-green">Lancer la partie</span> 
+                <p class="mb-0">
+                    Permet d'afficher l'écran à partager avec les joueurs (par exemple avec un partage d'écran).
+                </p>
+                -> Pour afficher les réponses proposées aux questions affichées lors des épreuves :
+                <ol>
+                    <li class="nopoint-li">Clavier : les touches <span class="text-info">1</span>, <span class="text-info">2</span>, <span class="text-info">3</span> et <span class="text-info">4</span> du pavé numérique</li>
+                    <li class="nopoint-li">et/ou</li>
+                    <li class="nopoint-li">Souris : cliquer sur la lettre <span class="text-green">A</span>, <span class="text-green">B</span>, <span class="text-green">C</span> et <span class="text-green">D</span> de la réponse correspondante</li>
+                </ol>
+                -> Pour afficher la ou les bonnes réponses d'une question :
+                <ol>
+                    <li class="nopoint-li">Clavier : la touche <span class="text-info">Entrée</span></li>
+                    <li class="nopoint-li">et/ou</li>
+                    <li class="nopoint-li">Souris : cliquer sur <span class="text-green">Solution</span> en bas de l'écran</li>
+                </ol>
+                <p class="mt-2 mb-0">
+                    Pour attribuer les points suite à une réponse, les boutons <i class="fas fa-minus-circle"></i> et <i class="fas fa-plus-circle"></i> permettent d'ajuster le score dès que besoin afin d'avoir davantage de libertés si vous souhaitez modifier un peu les règles.
+                </p>
+                <p class="mt-0">
+                    N.B. : les Bulbes sont distribués ou retirés par lot de 3 lors de l'épreuve de l'Haleine putride.
+                </p>
+            </li>
+            <li class="nopoint-li">
+                <span class="btn btn-green">Fiches de présentation</span>
+                <p>
+                    Permet au MJ de visualiser sur une autre page (cachée des joueurs) les questions et réponses des épreuves n'ayant pas d'affichage côté joueur.
+                </p>
+            </li>
+        </ol>
+    </div>
+
 </div>
-
-
 
 {% endblock %}
