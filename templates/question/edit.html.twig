@@ -6,41 +6,40 @@
 
 <h1>Modifier une question</h1>
 
-<div class="m-2 col-12 container-fluid">
-    <div class="col-12">
+<div class="m-2 col-11 container-fluid">
+    <div class="p-auto">
         {{ form_start(questionForm) }}
             {{ form_widget(questionForm) }}
     </div>
 
-            <div class="form-inline justify-content-center">
-                {% if onlyOne is not defined %}
-                    <div class="pb-3 pt-2 col-11 border-answers-top">
-                        {{ form_start(formA1) }}
-                            {{ form_widget(formA1) }}
-                    </div>
-                    <div class="pb-3 pt-2 col-11 border-answers-top">
-                        {{ form_start(formA2) }}
-                            {{ form_widget(formA2) }}
-                    </div>
-                    <div class="pb-3 pt-2 col-11 border-answers-top">
-                        {{ form_start(formA3) }}
-                            {{ form_widget(formA3) }}
-                    </div>
-                {% endif %}
+    <div class="form-inline justify-content-center">
+        {% if onlyOne is not defined %}
+            <div class="pb-3 pt-2 col-md-10 border-answers-top">
+                {{ form_start(formA1) }}
+                    {{ form_widget(formA1) }}
+            </div>
+            <div class="pb-3 pt-2 col-md-10 border-answers-top">
+                {{ form_start(formA2) }}
+                    {{ form_widget(formA2) }}
+            </div>
+            <div class="pb-3 pt-2 col-md-10 border-answers-top">
+                {{ form_start(formA3) }}
+                    {{ form_widget(formA3) }}
+            </div>
+        {% endif %}
 
-                <div class="pb-3 pt-2 col-11 border-answers-top">
-                    {{ form_start(formA4) }}
-                        {{ form_widget(formA4) }}
-                        <button type="submit" class="btn btn-primary mt-5 col-12">Enregistrer les modifications</button>
-                </div>
-                    {{ form_end(formA4) }}
-                </div>
-                {% if onlyOne is not defined %}
-                    {{ form_end(formA3) }}
-                    {{ form_end(formA2) }}
-                    {{ form_end(formA1) }}
-                {% endif %}
-    {{ form_end(questionForm) }}
+        <div class="pb-3 pt-2 col-md-10 border-answers-top">
+            {{ form_start(formA4) }}
+                {{ form_widget(formA4) }}
+                <button type="submit" class="btn btn-primary mt-5 col-12">Enregistrer les modifications</button>
+        </div>
+            {{ form_end(formA4) }}
+        {% if onlyOne is not defined %}
+            {{ form_end(formA3) }}
+            {{ form_end(formA2) }}
+            {{ form_end(formA1) }}
+        {% endif %}
+        {{ form_end(questionForm) }}
+    </div>
 </div>
-
 {% endblock %}

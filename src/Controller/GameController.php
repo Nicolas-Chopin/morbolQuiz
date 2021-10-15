@@ -348,9 +348,18 @@ class GameController extends AbstractController
 
         $menus = $menuRepository->findBy([
             'session' => $session,
-        ],
-        ['menuOrder' => 'ASC']
+            ],
+            ['menuOrder' => 'ASC']
         );
+
+        if(count($menus) != 3){
+            return $this->render('game/menus.html.twig', [
+                'session' => $session,
+                'category' => $category,
+                'emptyMenu' => 'emptyMenu',
+                'categoryNext' => $categoryNext,
+            ]);
+        };
 
         $menuOneId = $menus[0]->getId();
         $menuTwoId = $menus[1]->getId();
@@ -370,6 +379,7 @@ class GameController extends AbstractController
             'menuTwoId' => $menuTwoId,
             'menuThreeId' => $menuThreeId,
             'categoryNext' => $categoryNext,
+            'emptyMenu' => 'menusOK',
         ]);
     }
 

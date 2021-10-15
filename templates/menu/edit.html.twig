@@ -1,15 +1,15 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Modifier le thème{% endblock %}
+{% block title %}Modifier le {{ category.nameDisplay }}{% endblock %}
 
 {% block body %}
 
-<h1>Modifier le thème</h1>
+<h1>Modifier le {{ category.nameDisplay }}</h1>
 
 <div class="form-inline m-2">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary m-2">Soumettre</button>
+        <button type="submit" class="btn btn-primary m-2">Modifier</button>
     {{ form_end(form) }}
 </div>
 

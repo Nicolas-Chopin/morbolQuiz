@@ -9,6 +9,15 @@
         <h1 class="text-danger">Les {{ category.nameDisplay }} : {{ session.name }}</h2>
     </div>
 
+    {% if emptyMenu == 'emptyMenu' %}
+        <h3>Le nombre de menus disponible n'est pas correct. Pensez à les créer avant !</h3>
+        <div>
+            <a href="{{ path('menu_add', {id: session.id}) }}" class="text-success btn">Ajouter un {{ category.nameDisplay }} <i class="fas fa-plus-circle text-success"></i></a>
+        </div>
+        <div class="mt-2">
+            <a href="{{ path('session_show', {id: session.id}) }}">Retour au départ</a>
+        </div>
+    {% else %}
     <ul class="list-unstyled">
         <li>
             <span class="h1 text-primary font-horse">{{ category.nameDisplay }}</span>
@@ -26,7 +35,7 @@
 
     <div class="row">
         <div class="col-2">
-            <a href="{{ path('session_show', {id: session.id}) }}">Retour à l'entrée</a>
+            <a href="{{ path('session_show', {id: session.id}) }}">Retour au départ</a>
         </div>
         <div class="col text-center">
         </div>
@@ -34,6 +43,6 @@
             <a href="{{ path('sum', {id: session.id}) }}">{{ categoryNext.nameDisplay }}</a>
         </div>
     </div> 
-
+    {% endif %}
 </div>
 {% endblock %}

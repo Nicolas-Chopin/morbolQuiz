@@ -76,6 +76,10 @@
                 </a>
             </h3>
             <ul class="list-group list-group-flush">
+                {% if nuggetsQuestions is empty %}
+                    <h4>Aucune question trouvée.</h4>
+                {% endif %}
+
                 {% for nuggetsQuestion in nuggetsQuestions %}
                 <li class="question list-group-item row">
                     {% if nuggetsQuestion is defined and nuggetsQuestion.orderInNuggets < 7 %}
@@ -161,6 +165,9 @@
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
+            {% if sorpQuestions is empty %}
+                <h4>Aucune question trouvée.</h4>
+            {% endif %}
             <ul class="list-group list-group-flush">{% for sorpQuestion in sorpQuestions %}
                 <li class="question list-group-item row">
                     {% if sorpQuestion is defined and sorpQuestion.orderInSaltpepper < 11 %}
@@ -243,17 +250,20 @@
         #################################}
         <div class="tab-pane fade {% if app.request.query.get('menusActive') == 'active' %}show active{% endif %}" id="menus" role="tabpanel" aria-labelledby="menus-tab">
             <h3>
-                {{ menus.nameDisplay }} - 3 thèmes
+                {{ menus.nameDisplay }} - 3 {{ menus.nameDisplay }}
                 <a href="{{ path('menu_add', {id: session.id}) }}"
                     class="text-success btn">
-                    Ajouter un thème <i class="fas fa-plus-circle text-success"></i>
+                    Ajouter un {{ menus.nameDisplay }} <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
+            {% if menusNames is empty %}
+                <h4>C'est tout propre (0 {{ menus.nameDisplay }}).</h4>
+            {% endif %}
             <ul class="list-group list-group-flush">{% for menusName in menusNames %}
                 <li class="list-group-item question row">
                     <div class="sticky-top sticky-top-2">
                         <span class="col-10 h3">                       
-                            Thème {{ menusName.menuOrder }} : {{ menusName.name }} - 5 questions par thème
+                            {{ menus.nameDisplay }} {{ menusName.menuOrder }} : {{ menusName.name }} - 5 questions par {{ menus.nameDisplay }}
                         </span>
                         <span class="col-1">
                             <a href="{{ path('menu_edit', {id: session.id, idMenu: menusName.id}) }}"
@@ -268,7 +278,7 @@
                         <span class="col-1">
                             <a href="{{ path('menu_question_add', {id: session.id, idMenu: menusName.id}) }}"
                                 class="text-success btn p-0">
-                                Ajouter une question à ce thème <i class="fas fa-plus-circle text-success icon-q"></i>
+                                Ajouter une question à ce {{ menus.nameDisplay }} <i class="fas fa-plus-circle text-success icon-q"></i>
                             </a>
                         </span>
                     </div>
@@ -314,7 +324,7 @@
                         {% endfor %}</ul>
                 </li>
                 {% if loop.length != 3 and loop.last %}
-                Le nombre total de menu est incorrect. Merci d'en ajouter ou d'en supprimer.
+                Le nombre total de {{ menus.nameDisplay }} est incorrect. Merci d'en ajouter ou d'en supprimer.
                 {% endif %}
                 {% endfor %}</ul>
         </div>
@@ -329,6 +339,9 @@
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
+            {% if sumQuestions is empty %}
+                <h4>Aucune question trouvée.</h4>
+            {% endif %}
             <ul class="list-group list-group-flush">{% for sumQuestion in sumQuestions %}
                 <li class="list-group-item question row">
                     {% if sumQuestion is defined and sumQuestion.orderInSum < 11 %}
@@ -406,6 +419,9 @@
                     Ajouter une question <i class="fas fa-plus-circle text-success"></i>
                 </a>
             </h3>
+            {% if deathQuestions is empty %}
+                <h4>Aucune question trouvée.</h4>
+            {% endif %}
             <ul class="list-group list-group-flush">{% for deathQuestion in deathQuestions %}
                 <li class="list-group-item question row">
                     {% if deathQuestion is defined and deathQuestion.orderInDeathquiz < 11 %}

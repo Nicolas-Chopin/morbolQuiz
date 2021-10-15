@@ -8,6 +8,15 @@
 
     <h1 class="text-center">{{ category.nameDisplay }} : {{ session.name }}</h1>
 
+    {% if question == null %}
+        <h3>Aucune question trouvée. Pensez à les créer avant !</h3>
+        <div>
+            <a href="{{ path('menu_question_add', {id: session.id, idMenu: category.id}) }}" class="text-success btn">Ajouter une question aux {{ category.nameDisplay }} <i class="fas fa-plus-circle text-success"></i></a>
+        </div>
+        <div class="mt-2">
+            <a href="{{ path('session_show', {id: session.id}) }}">Retour au départ</a>
+        </div>
+    {% else %}
     <h3>{{ question.text }}</h3>
     <ul class="alpha">
         {% for answer in answers %}
@@ -46,12 +55,6 @@
             {% endif %}
         </div>
     </div>  
-
-    
-
-    
-
-
-
+    {% endif %}
 </div>
 {% endblock %}

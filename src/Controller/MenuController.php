@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Menu;
 use App\Form\MenuType;
 use App\Entity\Session;
+use App\Repository\CategoryRepository;
 use App\Repository\MenuRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,9 +16,13 @@ class MenuController extends AbstractController
     /**
      * @Route("/session/{id<\d+>}/menu/add", name="menu_add")
      */
-    public function add(Request $request, Session $session = null)
+    public function add(Request $request, Session $session = null, CategoryRepository $categoryRepository)
     {
         $menu = new Menu();
+
+        $category = $categoryRepository->findOneBy([
+            'name' => "Menus",
+        ]);
 
         $form = $this->createForm(MenuType::class, $menu);
 
@@ -42,13 +47,14 @@ class MenuController extends AbstractController
 
         return $this->render('menu/add.html.twig', [
             'form' => $form->createView(),
+            'category' => $category,
         ]);
     }
 
     /**
      * @Route("/session/{id<\d+>}/menu/edit/{idMenu<\d+>}", name="menu_edit")
      */
-    public function edit(Request $request, Session $session = null, MenuRepository $menuRepository, $idMenu)
+    public function edit(Request $request, Session $session = null, MenuRepository $menuRepository, $idMenu, CategoryRepository $categoryRepository)
     {
         //$this->denyAccessUnlessGranted('edit', $menu);
         
@@ -64,6 +70,10 @@ class MenuController extends AbstractController
         $menu = $menuRepository->findOneBy([
             'id' => $idMenu,
         ]);
+        $category = $categoryRepository->findOneBy([
+            'name' => "Menus",
+        ]);
+
         $form = $this->createForm(MenuType::class, $menu);
 
         $form->handleRequest($request);
@@ -87,6 +97,7 @@ class MenuController extends AbstractController
 
         return $this->render('menu/edit.html.twig', [
             'form' => $form->createView(),
+            'category' => $category,
         ]);
     }
 

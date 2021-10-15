@@ -21,20 +21,19 @@ class AnswerType extends AbstractType
                 'constraints' => new NotBlank(),
                 'label' => 'Réponse',
                 ])
-            /*->add('answerOrder', IntegerType::class, [
-                'attr' => ['class' => 'col-12 mb-2'],
-                'constraints' => new NotBlank(),
-                'label' => 'Numéro/ordre de la réponse',
-                ])*/
             ->add('isCorrect', ChoiceType::class, [
-                'attr' => ['class' => 'col-12 mb-1'],
+                'attr' => ['class' => 'mb-1 d-flex'],
                 'constraints' => new NotNull(),
                 'label' => 'Cette réponse est-elle correcte ?',
                 'choices' => [
                     'Oui' => true,
                     'Non' => false,
                 ],
-                'expanded' => false
+                'choice_attr' => [
+                    'Oui' => ['class' => 'ml-2'],
+                    'Non' => ['class' => 'ml-2'],
+                ],
+                'expanded' => true,
                 ]);
     }
 
